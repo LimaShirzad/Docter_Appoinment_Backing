@@ -1,0 +1,1 @@
+ALTER TABLE docter_info DROP COLUMN university_name;
