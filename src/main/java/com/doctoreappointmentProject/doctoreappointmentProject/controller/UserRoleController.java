@@ -19,6 +19,7 @@ public class UserRoleController {
 
 
     @PostMapping("/add")
+
     public UserRole addNewRole(@RequestBody String roleName) {
 
         return roleService.addRole(roleName);
