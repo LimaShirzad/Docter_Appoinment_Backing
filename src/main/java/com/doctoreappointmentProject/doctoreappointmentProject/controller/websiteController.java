@@ -1,4 +1,4 @@
-package com.doctoreappointmentProject.doctoreappointmentProject.AllwebsitePart;
+package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
