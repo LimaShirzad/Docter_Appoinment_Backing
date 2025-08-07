@@ -1,1 +1,0 @@
-ALTER TABLE docter_info ADD university_name VARCHAR(100) AFTER docter_cv;
