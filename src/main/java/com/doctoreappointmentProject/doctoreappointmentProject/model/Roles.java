@@ -7,11 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 
-@Table(name="user_role")
+@Table(name="roles")
 
 @Data
 
@@ -19,48 +17,18 @@ import java.util.List;
 
 @AllArgsConstructor
 
-public class Role {
+public class Roles {
+
 
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private  Integer id;
 
-    @Column(name="role_id")
 
-    private  Long role_id;
-
-    @NotBlank(message = "the role sholud not be blank")
-
+    @NotBlank(message = "the role should not be blank")
     @Column(name="role" ,nullable = false,unique = true,length = 50)
-
     private  String role;
-
-    @OneToMany(mappedBy = "role_refrence",cascade = CascadeType.ALL,orphanRemoval = true)
-
-    private List<User> users;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

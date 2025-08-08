@@ -25,34 +25,20 @@ public class Specialty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="specialty_id")
-
-    private  int specialty_id;
+    @Column(name="id")
+    private  Integer id;
 
 
 
 //    ============================specialty_name===============
 
-    @Size(max=150,message="specialty Name sholud not be grater than 150")
-
+    @Size(max=150,message="specialty Name should not be grater than 150")
     @NotBlank(message = "pleas enter the specialtyName ")
-
-    @Column(name="specialty_name",nullable = false,unique = true,length = 150)
-
-    private String specialty_name;
+    @Column(name="title",nullable = false,unique = true,length = 150)
+    private String title;
 
     @OneToMany(mappedBy = "specialty")
-
-    private List<Docter> docters;
-
-
-
-
-
-
-
-
+    private List<DoctorInfo> doctorsInfoList;
 
 
 }

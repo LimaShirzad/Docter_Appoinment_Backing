@@ -8,47 +8,32 @@ import lombok.NoArgsConstructor;
 
 @Entity
 
-@Table(name="diseas")
+@Table(name="diseases")
 
 @AllArgsConstructor
 
 @NoArgsConstructor
 
-public class Diseas {
+public class Diseases {
+
 
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="diseas_id")
-
-    private  int diseas_id;
+    @Column(name="id")
+    private  Integer id;
 
 
 //    =====================title=======================
 
     @Size(max=100,message = "title must not be grater than 100")
-
     @Column(name="title",nullable = false,length = 100)
-
     private  String title;
 
-//    ===================deseas_Type==========
+//    ===================disease_Type==========
 
     @Size(max=150,message = "title must not be grater than 150")
-
-    @Column(name="deseas_Type",nullable = false,length = 150)
-
-    private  String deseas_Type;
-
-
-
-
-
-
-
-
-
+    @Column(name="disease_Type",nullable = false,length = 150)
+    private  String diseaseType;
 
 
 }

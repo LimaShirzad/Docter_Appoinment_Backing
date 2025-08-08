@@ -1,4 +1,4 @@
-package com.doctoreappointmentProject.doctoreappointmentProject.Config;
+package com.doctoreappointmentProject.doctoreappointmentProject.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

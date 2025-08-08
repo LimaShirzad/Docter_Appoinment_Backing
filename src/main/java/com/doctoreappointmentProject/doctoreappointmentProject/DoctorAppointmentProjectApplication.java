@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
-public class DoctoreappointmentProjectApplication {
+public class DoctorAppointmentProjectApplication {
 
 	public static void main(String[] args)
 	{
 
-		SpringApplication.run(DoctoreappointmentProjectApplication.class, args);
+		SpringApplication.run(DoctorAppointmentProjectApplication.class, args);
 
 
 
