@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -34,6 +35,7 @@ public class User {
     @Size(max=100,message="should be less tha 100")
     @NotBlank(message = "first name should not be empty")
     @Column(name="first_name",nullable = false,length = 100)
+    @JsonProperty("first_name")
     private  String firstName;
 
 //    ================last name================
@@ -41,6 +43,7 @@ public class User {
     @Size(max=100,message="should be less tha 100")
     @NotBlank(message = "last name should not be empty")
     @Column(name="last_name",nullable = false,length = 100)
+    @JsonProperty("last_name")
     private  String lastName;
 
 //    ==================email=================
@@ -49,13 +52,15 @@ public class User {
     @NotBlank(message = "email should not be empty")
     @Email(message = "Invalid Email")
     @Column(name="email",nullable = false,length = 250,unique = true)
+    @JsonProperty("email")
     private  String email;
 
 //    =============userName==========
 
-    @Size(max=100,message="should be less tha 100")
+    @Size(min=5,max=100,message="should be less tha 100")
     @NotBlank(message = "userName should not be empty")
     @Column(name="user_name",nullable = false,length = 100,unique = true)
+    @JsonProperty("user_name")
     private  String userName;
 
 
@@ -63,13 +68,15 @@ public class User {
 //    ===================password==================
 
     @NotBlank(message = "password should not be empty")
-    @Column(name="password",nullable = false,unique = true)
-    private  Integer password;
+    @Column(name="password",nullable = false,unique = true,length = 30)
+    @JsonProperty("password")
+    private  String password;
 
 
 //    ===============profilePicture===============
 
     @Column(name="profile_picture")
+    @JsonProperty("profile_picture")
     private  String profilePicture;
 
 
@@ -77,6 +84,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name="gender",nullable = false)
+    @JsonProperty("gender")
     private Gender gender;
 
 //   =================relationship================
