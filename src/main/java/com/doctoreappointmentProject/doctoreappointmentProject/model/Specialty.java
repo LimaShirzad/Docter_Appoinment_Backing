@@ -16,9 +16,9 @@ import java.util.List;
 
 @Data
 
-@AllArgsConstructor
-
 @NoArgsConstructor
+
+@AllArgsConstructor
 
 public class Specialty {
 
@@ -40,5 +40,8 @@ public class Specialty {
     @OneToMany(mappedBy = "specialty")
     private List<DoctorInfo> doctorsInfoList;
 
-
+    public Specialty(Integer id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 }
