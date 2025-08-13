@@ -1,19 +1,16 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.util;
 
 
+import io.netty.util.internal.StringUtil;
+import jakarta.persistence.Column;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RolesUtil {
 
 
     public static String validateRole(String role)
     {
-
-           if(role == null || role.isBlank())
-           {
-
-               return  "Role Should not be empty";
-
-           }
 
            if(role.length() > 50)
            {

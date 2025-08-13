@@ -34,34 +34,21 @@ public class ValidationUtil {
 
     }
 
-    public  static  String validateAndClean(String input,String fieldName)
-    {
+   public static  boolean isNotEmpty(String value){
 
+        return value !=null && ! value.trim().isEmpty();
 
-        if(input==null)
-        {
-                  throw  new IllegalArgumentException(fieldName + " cannot be null");
-        }
+   }
+   public  static String cleanString(String value){
+        if(value==null)
+            return  null;
 
-        if(input.trim().isEmpty()){
+        return  value.trim().replaceAll("\\s+"," ");
 
-            throw new IllegalArgumentException(fieldName + "cannot be blank");
-
-        }
+   }
 
 
 
-        String trimmed=input.trim();
-
-        if(!trimmed.matches(NAME_PATTERN)){
-            throw new IllegalArgumentException(fieldName + " containe invalid characters");
-
-        }
-
-        return  trimmed;
-
-
-    }
 
 
 }

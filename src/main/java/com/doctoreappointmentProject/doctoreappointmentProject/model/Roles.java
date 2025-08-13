@@ -1,6 +1,9 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.netty.util.internal.StringUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -28,7 +31,15 @@ public class Roles {
 
     @NotBlank(message = "the role should not be blank")
     @Column(name="role" ,nullable = false,unique = true,length = 50)
+//    @JsonProperty("role")
     private  String role;
+
+    @PrePersist
+    @PreUpdate
+
+    public  void preSave(){
+        this.role= ValidationUtil.cleanString(this.role);
+    }
 
 
 }
