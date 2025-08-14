@@ -31,6 +31,12 @@ public class Roles {
     @Column(name="role" ,nullable = false,unique = true,length = 50)
     private  String role;
 
+    @PrePersist
+    @PreUpdate
 
+    public  void preSave(){
+        this.role= ValidationUtil.cleanString(this.role);
+        this.role=ValidationUtil.capitalizeFirstLetter(this.role);
+    }
 
 }
