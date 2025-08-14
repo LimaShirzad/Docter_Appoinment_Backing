@@ -12,6 +12,7 @@ public class SpecialtyTest {
         Specialty specialty = new Specialty(1, "Cardiology");
 
         assertEquals(1, specialty.getId());
+
         assertEquals("Cardiology", specialty.getTitle());
 
     }
@@ -23,9 +24,11 @@ public class SpecialtyTest {
         Specialty specialty = new Specialty();
 
         specialty.setId(1);
+
         specialty.setTitle("Neurology");
 
         assertEquals(1, specialty.getId());
+
         assertEquals("Neurology", specialty.getTitle());
 
 

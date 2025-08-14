@@ -89,4 +89,5 @@ public class DoctorInfo {
     @JoinColumn(name="specialty_id",referencedColumnName = "id",nullable = false)
     private  Specialty specialty;
 
+
 }

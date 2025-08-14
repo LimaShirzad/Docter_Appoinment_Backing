@@ -1,9 +1,8 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @DisplayName("Unit test for DiseasesType ")
 public class DiseasesTest {
@@ -21,9 +20,6 @@ public class DiseasesTest {
         assertEquals("new",diseases.getDiseaseType());
 
     }
-
-
-
 
     @Test
     @DisplayName("Test Title Field")
@@ -49,10 +45,5 @@ public class DiseasesTest {
 
 
     }
-
-
-
-
-
 
 }

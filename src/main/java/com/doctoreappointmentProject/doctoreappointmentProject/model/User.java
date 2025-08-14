@@ -93,4 +93,7 @@ public class User {
     @JoinColumn(name="role_id",referencedColumnName = "id",nullable = false)
     private Roles role;
 
+
+
+
 }
