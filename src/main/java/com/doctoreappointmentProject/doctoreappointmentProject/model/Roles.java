@@ -36,6 +36,13 @@ public class Roles {
 //    @JsonProperty("role")
     private  String role;
 
+    @PrePersist
+    @PreUpdate
+
+    public  void preSave(){
+        this.role= ValidationUtil.cleanString(this.role);
+        this.role=ValidationUtil.capitalizeFirstLetter(this.role);
+    }
 
 
 
