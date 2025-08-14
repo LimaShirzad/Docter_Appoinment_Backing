@@ -39,6 +39,7 @@ public class Roles {
 
     public  void preSave(){
         this.role= ValidationUtil.cleanString(this.role);
+        this.role=ValidationUtil.capitalizeFirstLetter(this.role);
     }
 
 
