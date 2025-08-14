@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy jar file (build should produce this)
-COPY target/*.jar doctor.jar
+COPY target/doctoreappointmentProject-0.0.1-SNAPSHOT.jar doctor.jar
 
 # Run the jar file
-ENTRYPOINT ["java", "-jar","doctor.jar"]
+ENTRYPOINT ["java", "-jar","/app/doctor.jar"]
