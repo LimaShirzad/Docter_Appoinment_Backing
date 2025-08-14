@@ -21,9 +21,9 @@ public class RoleService {
 
     }
 
-    public void saveRole(Roles role)
+    public Roles saveRole(Roles role)
     {
-        roleRepository.save(role);
+       return roleRepository.save(role);
 
     }
     public List<Roles> getAllRoles(){

@@ -2,17 +2,11 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
-import com.doctoreappointmentProject.doctoreappointmentProject.util.RolesUtil;
-import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.ls.LSException;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/roles")
@@ -22,11 +16,11 @@ public class RoleController {
     @Autowired
     private final RoleService roleService;
 
-    private  final RolesUtil rolesUtil;
+//    private  final RolesUtil rolesUtil;
 
-    public RoleController(RoleService roleService, RolesUtil rolesUtil) {
+    public RoleController(RoleService roleService) {
         this.roleService = roleService;
-        this.rolesUtil = rolesUtil;
+//        this.rolesUtil = rolesUtil;
     }
 
     @GetMapping("/hi")
@@ -37,10 +31,10 @@ public class RoleController {
 
 
     @PostMapping("/save")
-    public Roles createRoles(  @RequestBody @Valid Roles roles)
+    public Roles createRoles(  @RequestBody  Roles roles)
     {
 
-        return  roles;
+        return  roleService.saveRole(roles);
 //        Map<String,String> errors=new HashMap<>();
 //
 //        if(!ValidationUtil.isNotEmpty(roles.getRole())){
