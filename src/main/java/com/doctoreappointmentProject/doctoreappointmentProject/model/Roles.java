@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class Roles {
     @NotBlank(message = "the role should not be blank")
     @Column(name="role" ,nullable = false,unique = true,length = 50)
     private  String role;
+
 
 
 }
