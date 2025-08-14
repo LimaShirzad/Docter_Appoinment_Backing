@@ -2,8 +2,11 @@ package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 
 import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.netty.util.internal.StringUtil;
+=======
+>>>>>>> util
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -41,6 +44,5 @@ public class Roles {
         this.role= ValidationUtil.cleanString(this.role);
         this.role=ValidationUtil.capitalizeFirstLetter(this.role);
     }
-
 
 }
