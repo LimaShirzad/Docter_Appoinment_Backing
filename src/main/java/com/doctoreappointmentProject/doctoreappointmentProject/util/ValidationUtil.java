@@ -54,6 +54,9 @@ public class ValidationUtil {
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
+    public static boolean isOnlyLetters(String value) {
+        return value != null && value.matches("^[A-Za-z ]+$");
+    }
 
 
 
