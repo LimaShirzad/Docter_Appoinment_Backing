@@ -1,6 +1,10 @@
 package com.doctoreappointmentProject.doctoreappointmentProject;
 
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,24 +13,93 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
+    // 1️⃣ Field validation errors (@NotBlank, @Size, etc.)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> handleValidationExceptions(MethodArgumentNotValidException ex)
-    {
-        Map<String,String> errors=new HashMap<>();
+    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
 
-        ex.getBindingResult().getFieldErrors().forEach(error->
-                errors.put(error.getField(),
-                        error.getDefaultMessage())
-                );
-
-        return  errors;
-
+        return ResponseEntity.badRequest().body(Map.of(
+                "status", "error",
+                "errors", errors
+        ));
     }
 
+    // 2️⃣ Service or manual errors (your IllegalArgumentException)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> handleServiceErrors(IllegalArgumentException ex) {
+        // ✅ just use the message thrown in your service
+        return ResponseEntity.badRequest().body(Map.of(
+                "status", "error",
+                "message", ex.getMessage()
+        ));
+    }
 
+    // 3️⃣ Entity-level exceptions (@PrePersist / @PreUpdate)
+    @ExceptionHandler(TransactionSystemException.class)
+    public ResponseEntity<Map<String, String>> handleTransactionErrors(TransactionSystemException ex) {
+        Throwable cause = ex.getRootCause(); // get original cause
+        if (cause instanceof IllegalArgumentException) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "status", "error",
+                    "message", cause.getMessage() // ✅ show message from entity preSave()
+            ));
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "status", "error",
+                "message", "Something went wrong: " + ex.getMessage()
+        ));
+    }
 
+    // 4️⃣ Catch-all for unexpected exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, String>> handleAllOtherErrors(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "status", "error",
+                "message",  ex.getMessage()
+        ));
+    }
 }
+
+
+
+//@RestControllerAdvice
+//public class GlobalExceptionHandler {
+//
+//    // Handles all validation errors
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
+//        Map<String, String> fieldErrors = new HashMap<>();
+//        ex.getBindingResult().getFieldErrors().forEach(error ->
+//                fieldErrors.put(error.getField(), error.getDefaultMessage())
+//        );
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("status", "error");
+//        response.put("errors", fieldErrors);
+//        return ResponseEntity.badRequest().body(response);
+//    }
+//
+//    // Handles service/business exceptions
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public ResponseEntity<Map<String, String>> handleBusinessErrors(IllegalArgumentException ex) {
+//        return ResponseEntity.badRequest().body(Map.of(
+//                "status", "error",
+//                "message", ex.getMessage()
+//        ));
+//    }
+//
+//    // Optional: handle all other exceptions
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Map<String, String>> handleAllExceptions(Exception ex) {
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body(Map.of(
+//                        "status", "error",
+//                        "message", "Something went wrong: " + ex.getMessage()
+//                        ));
+// }
+//}

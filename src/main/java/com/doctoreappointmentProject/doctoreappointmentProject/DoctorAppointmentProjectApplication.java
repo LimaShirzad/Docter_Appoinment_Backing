@@ -12,8 +12,6 @@ public class DoctorAppointmentProjectApplication {
 
 		SpringApplication.run(DoctorAppointmentProjectApplication.class, args);
 
-
-
 	}
 
 }
