@@ -55,12 +55,9 @@ public class ValidationUtil {
     }
 
     public static boolean isOnlyLetters(String value) {
+
         return value != null && value.matches("^[A-Za-z ]+$");
+
     }
-
-
-
-
-
 
 }
