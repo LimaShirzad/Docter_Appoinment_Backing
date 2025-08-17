@@ -21,7 +21,8 @@ public class RoleService {
     {
         if(!ValidationUtil.isOnlyLetters(role.getRole())){
 
-            throw new IllegalArgumentException("Role name should contain only letters");
+            throw new
+                    IllegalArgumentException("Role name should contain only letters");
 
         }
 
