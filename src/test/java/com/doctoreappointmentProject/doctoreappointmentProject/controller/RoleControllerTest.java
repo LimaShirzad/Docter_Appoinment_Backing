@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,8 +66,7 @@ public class RoleControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"role\":\"" + longRole + "\"}"))
                         .andExpect(status().isBadRequest())
-                        .andExpect(jsonPath("$.errors.role")
-                                .value("The role Name sholud not be grater than 50"));
+                        .andExpect(jsonPath("$.errors.role").value("The role Name should not be greater than 50"));
 
 
     }
@@ -80,7 +80,7 @@ public class RoleControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"role\":\"\"}"))
                 .andExpect(status().isBadRequest())
-                 .andExpect(jsonPath("$.errors.role").value("the role should not be blank"));
+                .andExpect(jsonPath("$.errors.role").value("the role should not be blank"));
 
     }
 
@@ -156,16 +156,14 @@ public class RoleControllerTest {
         updatedRole.setId(Math.toIntExact(roleId));
         updatedRole.setRole("Manager");
 
-        Mockito.when(roleService.updateRole(eq(roleId), any(Roles.class)))
-                .thenReturn(updatedRole);
+        Mockito.when(roleService.updateRole(eq(roleId), any(Roles.class))).thenReturn(updatedRole);
 
         mockMvc.perform(put("/api/roles/{id}", roleId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"role\":\"Manager\"}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(roleId))
-                .andExpect(jsonPath("$.role")
-                 .value("Manager"));
+                        .andExpect(status().isOk())
+                        .andExpect(jsonPath("$.id").value(roleId))
+                        .andExpect(jsonPath("$.role").value("Manager"));
     }
 
     @Test
@@ -186,12 +184,5 @@ public class RoleControllerTest {
 
 
     }
-
-
-
-
-
-
-
 
 }

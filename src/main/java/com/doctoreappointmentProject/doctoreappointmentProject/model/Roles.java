@@ -33,7 +33,7 @@ public class Roles {
 
 
     @NotBlank(message = "the role should not be blank")
-    @Size(max=50,message = "The role Name sholud not be grater than 50")
+    @Size(max=50,message = "The role Name should not be greater than 50")
     @Column(name="role" ,nullable = false,unique = true,length = 50)
 //    @JsonProperty("role")
     private  String role;
