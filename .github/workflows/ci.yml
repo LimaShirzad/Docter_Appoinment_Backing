@@ -18,8 +18,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Maven (without tests)
-        run: mvn clean package -DskipTests
+      - name: Build with Maven (including tests)
+        run: mvn clean install
 
 
       - name: Log in to Docker Hub
