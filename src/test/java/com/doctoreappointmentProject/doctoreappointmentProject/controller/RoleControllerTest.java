@@ -4,6 +4,7 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,7 +19,7 @@ import org.springframework.http.MediaType;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-
+import static reactor.core.publisher.Mono.when;
 
 
 @WebMvcTest(RoleController.class)
@@ -39,7 +40,7 @@ public class RoleControllerTest {
         roles.setRole("Admin");
 
 
-        when(roleService.saveRole(any(Roles.class))).thenReturn(roles);
+        Mockito.when(roleService.saveRole(any(Roles.class))).thenReturn(roles);
 
 
         mockMvc.perform(post("/api/roles/save")
@@ -84,7 +85,7 @@ public class RoleControllerTest {
     @DisplayName("Save Role - Only letters validation")
     void testCreateRoleOnlyLetters() throws Exception {
 
-        when(roleService.saveRole(any(Roles.class))).thenThrow(new IllegalArgumentException("Role name should contain only letters"));
+        Mockito.when(roleService.saveRole(any(Roles.class))).thenThrow(new IllegalArgumentException("Role name should contain only letters"));
 
 
         mockMvc.perform(post("/api/roles/save")
@@ -99,7 +100,7 @@ public class RoleControllerTest {
     @DisplayName("Create Role - Unique validation")
     void testCreateRoleUnique() throws  Exception{
 
-        when(roleService.saveRole(any(Roles.class))).thenThrow(new IllegalArgumentException("Role already exists"));
+        Mockito.when(roleService.saveRole(any(Roles.class))).thenThrow(new IllegalArgumentException("Role already exists"));
 
         mockMvc.perform(post("/api/roles/save")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -135,7 +136,7 @@ public class RoleControllerTest {
           role.setId(1);
           role.setRole("Admin");
 
-          when(roleService.getRoleById(roleId)).thenReturn(role);
+          Mockito.when(roleService.getRoleById(roleId)).thenReturn(role);
 
           mockMvc.perform(get("/api/roles/{id}",roleId))
                   .andExpect(status().isOk())
@@ -152,7 +153,7 @@ public class RoleControllerTest {
         updatedRole.setId(Math.toIntExact(roleId));
         updatedRole.setRole("Manager");
 
-        when(roleService.updateRole(eq(roleId), any(Roles.class)))
+        Mockito.when(roleService.updateRole(eq(roleId), any(Roles.class)))
                 .thenReturn(updatedRole);
 
         mockMvc.perform(put("/api/roles/{id}", roleId)
@@ -171,7 +172,7 @@ public class RoleControllerTest {
                 (new Roles(1,"Admin"),
                 (new Roles(2,"User")));
 
-         when(roleService.getAllRoles()).thenReturn(roles);
+         Mockito.when(roleService.getAllRoles()).thenReturn(roles);
 
          mockMvc.perform(get("/api/roles"))
                  .andExpect(status().isOk())
