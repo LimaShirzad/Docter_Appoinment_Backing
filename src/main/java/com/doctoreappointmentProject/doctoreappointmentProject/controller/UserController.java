@@ -5,7 +5,6 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,10 +22,10 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<String> saveUser(@RequestBody User user)
+    public User createUser(@Valid @RequestBody User user)
     {
-          userService.savuser(user);
-          return  ResponseEntity.ok("user creaed");
+         return userService.saveUser(user);
+
     }
 
 
