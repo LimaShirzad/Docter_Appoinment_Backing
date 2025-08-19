@@ -21,7 +21,8 @@ public class UserService {
     @Transactional
     public User saveUser(User user)
     {
-        if(userRepository.existsByEmail(user.getUserName())){
+
+        if(userRepository.existsByEmail(user.getEmail())){
 
             throw  new IllegalArgumentException("Email already exists");
 
@@ -81,6 +82,7 @@ public class UserService {
                 }).collect(Collectors.toList());
 
     }
+
 
     public UserDTO getUserById(Long id) {
 
