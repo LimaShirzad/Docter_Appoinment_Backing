@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -71,7 +71,7 @@ public class UserController {
     @GetMapping("/{all_User}")
     public  ResponseEntity<Object> getAllUser(){
 
-          List<User> users=userService.getAllUser();
+          List<UserDTO> users=userService.getAllUsers();
 
           if(users.isEmpty()){
                   userResponse.put("message","No User Found");
@@ -81,7 +81,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{id}")
-    public User getUserId(@PathVariable Long id){
+    public UserDTO getUserId(@PathVariable Long id){
 
         return userService.getUserById(id);
 
