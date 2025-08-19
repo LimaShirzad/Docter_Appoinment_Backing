@@ -3,6 +3,8 @@ import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +18,30 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Transactional
     public User saveUser(User user)
     {
+        if(userRepository.existsByEmail(user.getUserName())){
+
+            throw  new IllegalArgumentException("Email already exists");
+
+        }
+
+        if(userRepository.existsByPassword(user.getPassword())){
+
+            throw new IllegalArgumentException("Password already exists");
+
+        }
+        if(userRepository.existsByUserName(user.getUserName())){
+
+            throw new IllegalArgumentException("UserName already exists");
+
+        }
+
            return userRepository.save(user);
     }
 
+    @Transactional
     public  void deleteUser(Long id){
 
        if(!userRepository.existsById(id)) {

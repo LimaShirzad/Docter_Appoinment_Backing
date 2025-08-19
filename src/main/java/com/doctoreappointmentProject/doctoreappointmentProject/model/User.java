@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -94,6 +95,14 @@ public class User {
     private Roles role;
 
 
+    @PrePersist
+    @PreUpdate
 
+    public  void preSave() {
+
+        this.firstName = ValidationUtil.cleanString(this.firstName);
+        this.lastName = ValidationUtil.capitalizeFirstLetter(this.lastName);
+
+    }
 
 }
