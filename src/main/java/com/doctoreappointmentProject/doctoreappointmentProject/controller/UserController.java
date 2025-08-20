@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -34,7 +34,6 @@ public class UserController {
 
         this.userService = userService;
     }
-
 
     @PostMapping
     public ResponseEntity<Map<String,String>> createUser(@Valid @RequestBody User user) {
@@ -59,7 +58,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public  ResponseEntity<Map<String,String>> deleteUserById(@PathVariable Long id){
 
-         userService.deleteUser(id);
+         userService.deleteUserById(id);
 
         userResponse.put("userDeleteMessage","User Deleted Successfully");
 

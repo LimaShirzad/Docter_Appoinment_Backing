@@ -1,9 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
-import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
-import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    public  void deleteUser(Long id){
+    public  void deleteUserById(Long id){
 
        if(!userRepository.existsById(id)) {
 
