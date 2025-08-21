@@ -145,7 +145,7 @@ public class UserControllerTest {
                 new UserDTO(2, "Jane", "Smith", "jane@example.com", "janesmith", null, Gender.FEMALE,1, "User")
         );
 
-        Mockito.when(userService.getAllUsers()).thenReturn(users);
+       when(userService.getAllUsers()).thenReturn(users);
 
         mockMvc.perform(get("/api/user/all"))
                 .andExpect(status().isOk())
@@ -158,7 +158,7 @@ public class UserControllerTest {
     @DisplayName("GET /api/user/all - should return message when no users exist")
     void testGetAllUsers_shouldReturnMessageIfEmpty() throws Exception {
 
-        Mockito.when(userService.getAllUsers()).thenReturn(List.of());
+        when(userService.getAllUsers()).thenReturn(List.of());
 
         mockMvc.perform(get("/api/user/all"))
                 .andExpect(status().isOk())

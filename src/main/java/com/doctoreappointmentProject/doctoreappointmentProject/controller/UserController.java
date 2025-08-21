@@ -75,6 +75,7 @@ public class UserController {
 
           if(users.isEmpty()){
                   userResponse.put("message","No User Found");
+                  return  ResponseEntity.ok(userResponse);
           }
           return ResponseEntity.ok(users);
 
