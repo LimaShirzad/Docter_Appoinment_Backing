@@ -30,10 +30,11 @@ public class UserController {
     private final Map<String,String> userResponse=new HashMap<>();
 
 
-    public UserController(UserService userService) {
-
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
+
 
     @PostMapping
     public ResponseEntity<Map<String,String>> createUser(@Valid @RequestBody User user) {
