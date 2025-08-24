@@ -12,9 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,7 +63,7 @@ public class TestUserService {
         assertEquals(2, result.size());
 //       ============================= test all filed From first List===================================
 
-        assertEquals("Ali",dto1.getFirsName());
+        assertEquals("Ali",dto1.getFirstName());
         assertEquals("Sherzad",dto1.getLastName());
         assertEquals("ali@gamil.com",dto1.getEmail());
         assertEquals("ali123",dto1.getUserName());
@@ -77,7 +75,7 @@ public class TestUserService {
 
         UserDTO dto2=result.get(1);
         assertEquals(2,dto2.getId());
-        assertEquals("Ahmad",dto2.getFirsName());
+        assertEquals("Ahmad",dto2.getFirstName());
         assertEquals("Ali",dto2.getLastName());
         assertEquals("ahmad@gamil.com",dto2.getEmail());
         assertEquals("ahmad123",dto2.getUserName());
@@ -105,7 +103,7 @@ public class TestUserService {
 
        UserDTO result=userService.getUserById(1L);
 
-       assertEquals("Ali",result.getFirsName());
+       assertEquals("Ali",result.getFirstName());
 
        verify(userRepository).findById(1L);
 
@@ -166,5 +164,21 @@ public class TestUserService {
         verify(userRepository, never()).deleteById(userId);
 
     }
+
+//    @Test
+//    @DisplayName("Test GetAllRolesExceptAdmin ")
+//    void shouldReturnListOfRole(){
+//
+//        Roles role1=new Roles(1,"Doctor");
+//        Roles role2=new Roles(2,"Patient");
+//
+//        List<Roles> roles=List.of(role1,role2);
+//
+//        when(userService.getAllRolesExceptAdmin()).thenReturn(roles);
+//
+//        verify(roleRepository).findAllExceptAdmin();
+//
+//    }
+
 
 }

@@ -2,6 +2,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
@@ -12,7 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,23 +42,35 @@ public class UserController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<Map<String,String>> createUser(@Valid @RequestBody User user) {
 
-        User saveUser=userService.saveUser(user);
+//    @PostMapping("/save")
+//    public ResponseEntity<Map<String,String>> createUser( @RequestParam String firstName,
+//                                                          @RequestParam String lastName ,
+//                                                          @RequestParam String email,
+//                                                          @RequestParam String userName,
+//                                                          @RequestParam String password,
+//                                                          @RequestParam Gender gender,
+//                                                          @RequestParam Long role,
+//                                                          @RequestParam("profilePicture")MultipartFile profilePicture) {
+//
+////
+//
+//
+//        userResponse.put("userSaveMessage","User Save Successfully");
+//
+//
+//        return new ResponseEntity<>(userResponse,HttpStatus.CREATED);
+//
+//    }
 
-        userResponse.put("userSaveMessage","User Save Successfully");
 
 
-        return new ResponseEntity<>(userResponse,HttpStatus.CREATED);
-
-    }
 
 
     @GetMapping("/roles")
     public List<Roles> getAllRoles(){
 
-        return  roleService.getAllRoles();
+        return  userService.getAllRolesExceptAdmin();
 
     }
 
@@ -67,6 +85,7 @@ public class UserController {
 
 
     }
+
 
     @GetMapping("/all")
     public  ResponseEntity<Object> getAllUser(){

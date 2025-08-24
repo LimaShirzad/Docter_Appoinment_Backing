@@ -1,7 +1,10 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
+import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    RoleRepository roleRepository;
 
     @Transactional
     public User saveUser(User user)
@@ -37,7 +42,15 @@ public class UserService {
 
         }
 
-           return userRepository.save(user);
+        if (!ValidationUtil.isOnlyLetters(user.getFirstName())) {
+            throw new IllegalArgumentException("firstName should contain only letters");
+        }
+        if (!ValidationUtil.isOnlyLetters(user.getLastName())) {
+            throw new IllegalArgumentException("LastName should contain only letters");
+        }
+
+
+        return userRepository.save(user);
     }
 
     @Transactional
@@ -61,7 +74,7 @@ public class UserService {
 
                     UserDTO dto=new UserDTO();
                     dto.setId(user.getId());
-                    dto.setFirsName(user.getFirstName());
+                    dto.setFirstName(user.getFirstName());
                     dto.setLastName(user.getLastName());
                     dto.setEmail(user.getEmail());
                     dto.setUserName(user.getUserName());
@@ -92,7 +105,7 @@ public class UserService {
         UserDTO dto=new UserDTO();
 
         dto.setId(user.getId());
-        dto.setFirsName(user.getFirstName());
+        dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());
         dto.setUserName(user.getUserName());
@@ -110,20 +123,15 @@ public class UserService {
 
 
     }
+
+    public List<Roles> getAllRolesExceptAdmin(){
+
+       return roleRepository.findAllExceptAdmin();
+
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

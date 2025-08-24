@@ -17,7 +17,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 1️⃣ Field validation errors (@NotBlank, @Size, etc.)
+    //  Field validation errors (@NotBlank, @Size, etc.)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -30,24 +30,24 @@ public class GlobalExceptionHandler {
         ));
     }
 
-    // 2️⃣ Service or manual errors (your IllegalArgumentException)
+    //  Service or manual errors (your IllegalArgumentException)
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, String>> handleServiceErrors(IllegalArgumentException ex) {
-        // ✅ just use the message thrown in your service
+        //  just use the message thrown in your service
         return ResponseEntity.badRequest().body(Map.of(
                 "status", "error",
                 "message", ex.getMessage()
         ));
     }
 
-    // 3️⃣ Entity-level exceptions (@PrePersist / @PreUpdate)
+    //  Entity-level exceptions (@PrePersist / @PreUpdate)
     @ExceptionHandler(TransactionSystemException.class)
     public ResponseEntity<Map<String, String>> handleTransactionErrors(TransactionSystemException ex) {
         Throwable cause = ex.getRootCause(); // get original cause
         if (cause instanceof IllegalArgumentException) {
             return ResponseEntity.badRequest().body(Map.of(
                     "status", "error",
-                    "message", cause.getMessage() // ✅ show message from entity preSave()
+                    "message", cause.getMessage() // show message from entity preSave()
             ));
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
         ));
     }
 
-    // 4️⃣ Catch-all for unexpected exceptions
+    //  Catch-all for unexpected exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleAllOtherErrors(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(

@@ -36,7 +36,7 @@ public class User {
     @Size(max=100,message="should be less tha 100")
     @NotBlank(message = "first name should not be empty")
     @Column(name="first_name",nullable = false,length = 100)
-    @JsonProperty("first_name")
+//    @JsonProperty("first_name")
     private  String firstName;
 
 //    ================last name================
@@ -44,7 +44,7 @@ public class User {
     @Size(max=100,message="should be less tha 100")
     @NotBlank(message = "last name should not be empty")
     @Column(name="last_name",nullable = false,length = 100)
-    @JsonProperty("last_name")
+//    @JsonProperty("last_name")
     private  String lastName;
 
 //    ==================email=================
@@ -53,7 +53,7 @@ public class User {
     @NotBlank(message = "email should not be empty")
     @Email(message = "Invalid Email")
     @Column(name="email",nullable = false,length = 250,unique = true)
-    @JsonProperty("email")
+//    @JsonProperty("email")
     private  String email;
 
 //    =============userName==========
@@ -61,7 +61,7 @@ public class User {
     @Size(min=5,max=100,message="should be less tha 100")
     @NotBlank(message = "userName should not be empty")
     @Column(name="user_name",nullable = false,length = 100,unique = true)
-    @JsonProperty("user_name")
+//    @JsonProperty("user_name")
     private  String userName;
 
 
@@ -70,22 +70,22 @@ public class User {
 
     @NotBlank(message = "password should not be empty")
     @Column(name="password",nullable = false,unique = true,length = 30)
-    @JsonProperty("password")
+//    @JsonProperty("password")
     private  String password;
 
 
 //    ===============profilePicture===============
 
     @Column(name="profile_picture")
-    @JsonProperty("profile_picture")
+//    @JsonProperty("profile_picture")
     private  String profilePicture;
 
 
 //    =================gender==========
 
     @Enumerated(EnumType.STRING)
-    @Column(name="gender",nullable = false)
-    @JsonProperty("gender")
+    @Column(name="gender")
+//    @JsonProperty("gender")
     private Gender gender;
 
 //   =================relationship================

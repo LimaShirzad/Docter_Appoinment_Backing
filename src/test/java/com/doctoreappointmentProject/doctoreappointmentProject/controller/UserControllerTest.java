@@ -2,25 +2,15 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
+import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
@@ -91,7 +81,7 @@ public class UserControllerTest {
         // Create a DTO to return
         UserDTO userDTO = new UserDTO();
         userDTO.setId(Math.toIntExact(userId));
-        userDTO.setFirsName("John");
+        userDTO.setFirstName("John");
         userDTO.setLastName("Doe");
         userDTO.setEmail("john@example.com");
         userDTO.setUserName("johndoe");
@@ -150,8 +140,8 @@ public class UserControllerTest {
         mockMvc.perform(get("/api/user/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].firsName").value("John"))
-                .andExpect(jsonPath("$[1].firsName").value("Jane"));
+                .andExpect(jsonPath("$[0].firstName").value("John"))
+                .andExpect(jsonPath("$[1].firstName").value("Jane"));
     }
 
     @Test
@@ -164,6 +154,24 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("No User Found"));
     }
+
+    @Test
+    @DisplayName("Get api/user/roles should return list of roles withe out Admin")
+    void testGetAllRoles() throws Exception{
+
+        List<Roles> role=List.of(
+                new Roles(1,"Doctor"),
+                new Roles(2,"Patient")
+
+        );
+
+        when(userService.getAllRolesExceptAdmin()).thenReturn(role);
+
+        mockMvc.perform(get("/api/user/roles"))
+                .andExpect(status().isOk());
+    }
+
+
 
 
 }
