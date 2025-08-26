@@ -72,5 +72,17 @@ public class GlobalExceptionHandler {
                 "message", ex.getMessage()
         ));
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String,String>> handleDataIntegrityViolation(DataIntegrityViolationException ex){
+
+        Map<String,String> error=new HashMap<>();
+
+        error.put("error","You can Not Delete This Record Because It is Referenced in another table!");
+
+        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+
+    }
+
 }
 

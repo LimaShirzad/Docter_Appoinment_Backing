@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -32,16 +33,32 @@ public class Specialty {
 
 //    ============================specialty_name===============
 
-    @Size(max=150,message="specialty Name should not be grater than 150")
-    @NotBlank(message = "pleas enter the specialtyName ")
+    @Size(max=150,message="Specialty Name Should Not be Grater Than 150")
+    @NotBlank(message = "pleas Enter  SpecialtyName ")
     @Column(name="title",nullable = false,unique = true,length = 150)
     private String title;
 
-    @OneToMany(mappedBy = "specialty")
-    private List<DoctorInfo> doctorsInfoList;
+    @PrePersist
+    @PreUpdate
 
-    public Specialty(Integer id, String title) {
-        this.id = id;
-        this.title = title;
+    public  void preSave() {
+        this.title = ValidationUtil.cleanString(this.title);
+        this.title = ValidationUtil.capitalizeFirstLetter(this.title);
+
+            if (!ValidationUtil.isOnlyLetters(this.title)) {
+                throw new IllegalArgumentException("Specialty Name should contain only letters");
+            }
+
+
+
+
     }
+
+//    @OneToMany(mappedBy = "specialty")
+//    private List<DoctorInfo> doctorsInfoList;
+
+//    public Specialty(Integer id, String title) {
+//        this.id = id;
+//        this.title = title;
+//    }
 }
