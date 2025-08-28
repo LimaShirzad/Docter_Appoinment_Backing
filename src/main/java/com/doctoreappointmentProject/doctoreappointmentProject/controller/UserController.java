@@ -43,28 +43,6 @@ public class UserController {
 
 
 
-//    @PostMapping("/save")
-//    public ResponseEntity<Map<String,String>> createUser( @RequestParam String firstName,
-//                                                          @RequestParam String lastName ,
-//                                                          @RequestParam String email,
-//                                                          @RequestParam String userName,
-//                                                          @RequestParam String password,
-//                                                          @RequestParam Gender gender,
-//                                                          @RequestParam Long role,
-//                                                          @RequestParam("profilePicture")MultipartFile profilePicture) {
-//
-////
-//
-//
-//        userResponse.put("userSaveMessage","User Save Successfully");
-//
-//
-//        return new ResponseEntity<>(userResponse,HttpStatus.CREATED);
-//
-//    }
-
-
-
 
 
     @GetMapping("/roles")

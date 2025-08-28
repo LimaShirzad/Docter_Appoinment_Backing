@@ -8,7 +8,10 @@ import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUt
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,37 +24,7 @@ public class UserService {
     @Autowired
     RoleRepository roleRepository;
 
-    @Transactional
-    public User saveUser(User user)
-    {
 
-        if(userRepository.existsByEmail(user.getEmail())){
-
-            throw  new IllegalArgumentException("Email already exists");
-
-        }
-
-        if(userRepository.existsByPassword(user.getPassword())){
-
-            throw new IllegalArgumentException("Password already exists");
-
-        }
-        if(userRepository.existsByUserName(user.getUserName())){
-
-            throw new IllegalArgumentException("UserName already exists");
-
-        }
-
-        if (!ValidationUtil.isOnlyLetters(user.getFirstName())) {
-            throw new IllegalArgumentException("firstName should contain only letters");
-        }
-        if (!ValidationUtil.isOnlyLetters(user.getLastName())) {
-            throw new IllegalArgumentException("LastName should contain only letters");
-        }
-
-
-        return userRepository.save(user);
-    }
 
     @Transactional
     public  void deleteUserById(Long id){
@@ -78,7 +51,7 @@ public class UserService {
                     dto.setLastName(user.getLastName());
                     dto.setEmail(user.getEmail());
                     dto.setUserName(user.getUserName());
-                    dto.setProfilePicture(user.getProfilePicture());
+//                    dto.setProfilePicture(Arrays.toString(user.getProfilePicture()));
                     dto.setGender(user.getGender());
 
 //        =================form role entity===============
@@ -109,7 +82,7 @@ public class UserService {
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());
         dto.setUserName(user.getUserName());
-        dto.setProfilePicture(user.getProfilePicture());
+//        dto.setProfilePicture(user.getProfilePicture());
         dto.setGender(user.getGender());
 
 //        =================form role entity===============

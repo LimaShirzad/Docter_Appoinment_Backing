@@ -76,9 +76,9 @@ public class User {
 
 //    ===============profilePicture===============
 
+    @Lob
     @Column(name="profile_picture")
-//    @JsonProperty("profile_picture")
-    private  String profilePicture;
+    private  byte[] profilePicture;
 
 
 //    =================gender==========
