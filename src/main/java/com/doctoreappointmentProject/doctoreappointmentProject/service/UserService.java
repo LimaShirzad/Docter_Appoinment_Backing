@@ -156,25 +156,7 @@ public class UserService {
       return  userRepository.save(user);
     }
 
-//    public User saveUser(UserSaveDTO dto, byte[] profilePicture) {
-//
-////         fetch role from DB
-//        Roles role = roleRepository.findById((long) dto.getRoleId())
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid Role ID"));
-//
-//        // create user entity
-//        User user = new User();
-//        user.setFirstName(dto.getFirstName());
-//        user.setLastName(dto.getLastName());
-//        user.setEmail(dto.getEmail());
-//        user.setUserName(dto.getUserName());
-//        user.setPassword(dto.getPassword());
-//        user.setGender(dto.getGender());
-//        user.setRole(role);                // set the fetched role
-//        user.setProfilePicture(profilePicture);
-//
-//        return userRepository.save(user);  // save to DB
-//    }
+
 }
 
 
