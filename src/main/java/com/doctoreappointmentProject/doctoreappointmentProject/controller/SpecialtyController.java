@@ -69,7 +69,8 @@ public class SpecialtyController {
 
 
     @GetMapping("/all")
-    public Page<Specialty> getAllSpecialty(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "5") int size){
+    public Page<Specialty> getAllSpecialty(@RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "5") int size){
 
         return specialtyService.getAllSpecialty(PageRequest.of(page,size));
 

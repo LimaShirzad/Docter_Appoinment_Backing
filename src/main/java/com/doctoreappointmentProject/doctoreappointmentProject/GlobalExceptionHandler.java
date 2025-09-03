@@ -73,16 +73,16 @@ public class GlobalExceptionHandler {
         ));
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String,String>> handleDataIntegrityViolation(DataIntegrityViolationException ex){
-
-        Map<String,String> error=new HashMap<>();
-
-        error.put("error","You can Not Delete This Record Because It is Referenced in another table!");
-
-        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
-
-    }
+//    @ExceptionHandler(DataIntegrityViolationException.class)
+//    public ResponseEntity<Map<String,String>> handleDataIntegrityViolation(DataIntegrityViolationException ex){
+//
+//        Map<String,String> error=new HashMap<>();
+//
+//        error.put("error","You can Not Delete This Record Because It is Referenced in another table!");
+//
+//        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+//
+//    }
 
 }
 

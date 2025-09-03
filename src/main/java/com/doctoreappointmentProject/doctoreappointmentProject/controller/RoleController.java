@@ -35,7 +35,7 @@ public class RoleController {
 
         return roleService.saveRole(role);
     }
-
+//getRole
     @GetMapping
     public List<Roles> getRoles()
     {

@@ -49,8 +49,8 @@ public class TestUserService {
         role2.setId(2);
         role2.setRole("User");
 
-        User user1 = new User(1, "Ali", "Sherzad", "ali@gamil.com", "ali123","1234", "ali.pic", Gender.MALE, role1);
-        User user2 = new User(2, "Ahmad", "Ali", "ahmad@gamil.com", "ahmad123","345", "ahmad.pic", Gender.MALE, role2);
+        User user1 = new User(1, "Ali", "Sherzad", "ali@gamil.com", "ali123","1234", "ali.pic".getBytes(), Gender.MALE, role1);
+        User user2 = new User(2, "Ahmad", "Ali", "ahmad@gamil.com", "ahmad123","345", "ahmad.pic".getBytes(), Gender.MALE, role2);
 
         List<User> users = List.of(user1, user2);
 

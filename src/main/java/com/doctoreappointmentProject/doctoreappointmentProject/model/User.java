@@ -67,9 +67,9 @@ public class User {
 
 
 //    ===================password==================
-
+//length should not be define
     @NotBlank(message = "password should not be empty")
-    @Column(name="password",nullable = false,unique = true,length = 30)
+    @Column(name="password",nullable = false,unique = true)
 //    @JsonProperty("password")
     private  String password;
 
@@ -77,7 +77,7 @@ public class User {
 //    ===============profilePicture===============
 
     @Lob
-    @Column(name="profile_picture")
+    @Column(name="profile_picture",columnDefinition = "LONGBLOB")
     private  byte[] profilePicture;
 
 

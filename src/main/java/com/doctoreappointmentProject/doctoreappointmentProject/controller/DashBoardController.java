@@ -19,7 +19,7 @@ public class DashBoardController {
     public DashBoardController(DashBoardService dashBoardService) {
         this.dashBoardService = dashBoardService;
     }
-
+//patient
     @GetMapping("/allPatent")
     public  long getTotalPatient(){
 
