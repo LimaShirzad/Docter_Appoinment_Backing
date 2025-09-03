@@ -44,32 +44,26 @@ public class UserController {
 
 
     @PostMapping("/save")
-    public Map<String, String> saveUser(
+    public ResponseEntity<Map<String,Object>> saveUser(
             @Valid @ModelAttribute UserSaveDTO dto,
-            @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture
-    ) throws IOException {
-//        try {
-//            // set profile picture if uploaded
-//            if (profilePicture != null && !profilePicture.isEmpty()) {
-                dto.setProfilePictureUrl(profilePicture.getBytes());
-//            }
+            @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture) throws IOException {
 
-            // save user
-            userService.saveUser(dto);
 
-            // return success
-            return Map.of(
-                    "status", "success",
-                    "message", "User Saved Successfully ✅"
-            );
 
-//        } catch (Exception e) {
-//            // return error
-//            return Map.of(
-//                    "status", "error",
-//                    "message", e.getMessage()
-//            );
-//        }
+       dto.setProfilePictureUrl(profilePicture.getBytes());
+
+
+        User savedUser = userService.saveUser(dto);
+
+        Map<String,Object> response=new HashMap<>();
+
+        String message="Account Created SuccessFully ";
+        response.put("id",savedUser.getId());
+        response.put("userMessage",message);
+
+
+        return  ResponseEntity.ok(response);
+
     }
 
 //    @PostMapping("/save")

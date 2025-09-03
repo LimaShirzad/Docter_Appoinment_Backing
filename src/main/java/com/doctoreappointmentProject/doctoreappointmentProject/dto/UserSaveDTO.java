@@ -8,7 +8,7 @@ import lombok.Data;
 
 public class UserSaveDTO {
 
-//    private int id;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;

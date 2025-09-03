@@ -111,7 +111,7 @@ public class UserService {
 
 
     @Transactional
-    public void saveUser(UserSaveDTO dto) {
+    public User saveUser(UserSaveDTO dto) {
 
         if(userRepository.existsByEmail(dto.getEmail())){
 
@@ -153,7 +153,7 @@ public class UserService {
         user.setRole(role);
 
         // Save to database
-        userRepository.save(user);
+      return  userRepository.save(user);
     }
 
 //    public User saveUser(UserSaveDTO dto, byte[] profilePicture) {
