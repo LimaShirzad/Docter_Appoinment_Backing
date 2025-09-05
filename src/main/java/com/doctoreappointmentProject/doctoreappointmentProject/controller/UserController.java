@@ -3,23 +3,17 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserSaveDTO;
-import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
-import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,56 +38,26 @@ public class UserController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<Map<String,Object>> saveUser(
+    public ResponseEntity<Map<String,Object>> createUser(
             @Valid @ModelAttribute UserSaveDTO dto,
             @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture) throws IOException {
 
 
-
        dto.setProfilePictureUrl(profilePicture.getBytes());
 
-
-        User savedUser = userService.saveUser(dto);
+        UserSaveDTO savedUserDTO = userService.saveUser(dto);
 
         Map<String,Object> response=new HashMap<>();
 
         String message="Account Created SuccessFully ";
-        response.put("id",savedUser.getId());
+
         response.put("userMessage",message);
 
+        response.put("user",savedUserDTO);
 
         return  ResponseEntity.ok(response);
 
     }
-
-//    @PostMapping("/save")
-//    public ResponseEntity<?> saveUser(
-//            @Valid @ModelAttribute UserSaveDTO dto,
-//            @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture
-//    ) throws IOException {
-//
-//        try {
-//            byte[] pictureBytes = null;
-//            if (profilePicture != null && !profilePicture.isEmpty()) {
-//                pictureBytes = profilePicture.getBytes();
-//            }
-//
-//            userService.saveUser(dto, pictureBytes);
-//
-//
-//            return ResponseEntity.ok(Map.of(
-//                    "status", "success",
-//                    "message", "User Saved Successfully ✅"
-//            ));
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(Map.of(
-//                    "status", "error",
-//                    "message", e.getMessage()
-//            ));
-//        }
-//    }
-
-
 
 
     @GetMapping("/roles")

@@ -69,8 +69,9 @@ public class DoctorInfo {
 
 //    =================cv==========
 
-    @Column(name="cv",nullable = false,length = 300)
-    private  String cv;
+    @NotBlank(message="Please Select Cv")
+    @Column(name="cv",nullable = false)
+    private  byte[] cv;
 
 
 //    =======================accepted==========

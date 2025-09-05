@@ -111,7 +111,7 @@ public class UserService {
 
 
     @Transactional
-    public User saveUser(UserSaveDTO dto) {
+    public UserSaveDTO saveUser(UserSaveDTO dto) {
 
         if(userRepository.existsByEmail(dto.getEmail())){
 
@@ -134,26 +134,24 @@ public class UserService {
 
         User user = new User();
 
-        // Set basic fields
+
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setEmail(dto.getEmail());
         user.setUserName(dto.getUserName());
         user.setPassword(dto.getPassword());
         user.setGender(dto.getGender());
+        user.setProfilePicture(dto.getProfilePictureUrl());
 
-        // Set profile picture if available
-        if (dto.getProfilePictureUrl() != null) {
-            user.setProfilePicture(dto.getProfilePictureUrl());
-        }
-
-        // Set role (make sure role exists)
         Roles role = roleRepository.findById((long) dto.getRoleId())
                 .orElseThrow(() -> new RuntimeException("Invalid Role ID"));
         user.setRole(role);
 
-        // Save to database
-      return  userRepository.save(user);
+
+        userRepository.save(user);
+
+       return new UserSaveDTO(user.getId(), role.getId());
+
     }
 
 
