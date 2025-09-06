@@ -17,7 +17,7 @@ public class PatientInfoTest {
         Roles role =new Roles(5,"Admin");
 
         User user =new User(1,"Umar","Sherzad","umar@gmail.com"
-                ,"umar123","1234","publish", Gender.MALE,role);
+                ,"umar123","1234", "publish".getBytes(), Gender.MALE,role);
 
         PatientInfo patientInfo=new PatientInfo(1,"A",user);
 

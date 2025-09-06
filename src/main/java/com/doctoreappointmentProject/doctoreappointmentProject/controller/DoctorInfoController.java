@@ -1,13 +1,17 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
-import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoSaveDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserSaveDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.DoctorInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/doctors")
@@ -16,6 +20,8 @@ public class DoctorInfoController {
 
     private final DoctorInfoService doctorInfoService;
 
+    private Map<String,String> doctorResponse= new HashMap<>();
+
     public DoctorInfoController(DoctorInfoService doctorInfoService) {
 
         this.doctorInfoService = doctorInfoService;
@@ -23,12 +29,34 @@ public class DoctorInfoController {
     }
 
     @GetMapping
-    public List<DoctorInfoDTO> getDoctor(){
+    public List<DoctorInfoSaveDTO> getDoctor(){
 
        return doctorInfoService.getAllDoctors();
 
-
     }
+
+
+        @PostMapping("/save")
+    public ResponseEntity<Map<String,String>> createDoctor(@Valid @ModelAttribute DoctorInfoSaveDTO doctorInfoSaveDTO,
+                                                           @RequestParam(value = "cv",required = false) MultipartFile cv) throws IOException {
+
+
+//            dto.setProfilePictureUrl(profilePicture.getBytes());
+
+//            doctorInfoSaveDTO.setCv(cv.getBytes());
+//            byte[] cvBytes = doctorInfoSaveDTO.getCv().getBytes();
+
+            doctorInfoService.saveDoctorInfo(doctorInfoSaveDTO);
+
+            doctorResponse.put("saveDoctor","Account Created Successfully");
+
+            return ResponseEntity.ok(doctorResponse);
+
+
+
+
+        }
+
 
 
 

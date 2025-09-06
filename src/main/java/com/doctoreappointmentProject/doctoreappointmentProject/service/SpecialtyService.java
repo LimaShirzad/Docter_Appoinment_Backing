@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SpecialtyService {
 
@@ -83,6 +85,12 @@ public class SpecialtyService {
 
         existingSpecialty.setTitle(updateSpecialty.getTitle());
         return specialtyRepository.save(existingSpecialty);
+    }
+
+    public List<Specialty> getAllSpecialty(){
+
+        return  specialtyRepository.findAll();
+
     }
 
 

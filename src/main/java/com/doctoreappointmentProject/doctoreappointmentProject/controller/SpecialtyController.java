@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.lang.model.util.Elements;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -74,8 +75,17 @@ public class SpecialtyController {
 
         return specialtyService.getAllSpecialty(PageRequest.of(page,size));
 
+    }
+
+    @GetMapping("/all_Specialty")
+    public List<Specialty> getAllSpecialty(){
+
+        return specialtyService.getAllSpecialty();
 
     }
+
+
+
 
 
 

@@ -35,12 +35,11 @@ public class PatientInfoController {
 
         return ResponseEntity.ok(patientResponse);
 
-
-
-
-
-
     }
+
+//    @DeleteMapping("/{id}")
+
+
 
 
 

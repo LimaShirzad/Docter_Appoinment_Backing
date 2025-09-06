@@ -97,7 +97,7 @@ public class TestUserService {
         role2.setId(2);
         role2.setRole("User");
 
-       User user = new User(Math.toIntExact(1L), "Ali", "Sherzad", "ali@gamil.com", "ali123","1234", "ali.pic", Gender.MALE, role2);
+       User user = new User(Math.toIntExact(1L), "Ali", "Sherzad", "ali@gamil.com", "ali123","1234", "ali.pic".getBytes(), Gender.MALE, role2);
 
        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 

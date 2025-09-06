@@ -3,6 +3,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,21 +41,22 @@ public class DoctorInfo {
 
 //    ===================experience_year==========
 
-    @Column(name="experience_year",nullable = false)
+    @NotNull(message = "Experience Year Should Not Be Null")
+    @Column(name="experience_year")
     private  Integer experienceYear;
 
 //    ============university_name===============
 
     @Size(max=250,message = "universityName must less than 250")
     @NotBlank(message = "universityName should not be blank")
-    @Column(name="university_name",nullable = false,length = 250)
+    @Column(name="university_name",length = 250)
     private  String universityName;
 
 
 
 //    =================graduation_year============
 
-    @NotBlank(message = "the Data filed must not be blank")
+    @NotNull(message = "the Data filed must not be blank")
     @Column(name="graduation_year",nullable = false)
     private LocalDate graduationYear;
 
@@ -69,8 +71,9 @@ public class DoctorInfo {
 
 //    =================cv==========
 
-    @NotBlank(message="Please Select Cv")
-    @Column(name="cv",nullable = false)
+    @NotNull(message="Cv Must Not Be Blank")
+    @Lob
+    @Column(name="cv",columnDefinition = "LONGBLOB", nullable=false)
     private  byte[] cv;
 
 

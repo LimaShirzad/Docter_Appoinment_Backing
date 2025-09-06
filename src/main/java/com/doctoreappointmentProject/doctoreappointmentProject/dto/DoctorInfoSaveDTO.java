@@ -1,9 +1,11 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.dto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -11,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorInfoDTO {
+public class DoctorInfoSaveDTO {
 
     private int id;
 
@@ -19,22 +21,24 @@ public class DoctorInfoDTO {
     @NotBlank(message = "must not be empty")
     private String education;
 
+    @NotNull(message = "Experience Year Should Not Be Null")
     private Integer experienceYear;
+
 
     @Size(max=250,message = "universityName must less than 250")
     @NotBlank(message = "universityName should not be blank")
     private String universityName;
 
 
-    @NotBlank(message = "the Data filed must not be blank")
+    @NotNull(message = "the Data filed must not be blank")
     private LocalDate graduationYear;
 
     @Size(max=500,message = "address should not be greater than 500")
     @NotBlank(message = "address should not be blank")
     private String address;
 
-    @NotBlank(message="Please Select Cv")
-    private byte[] cv;
+    @NotNull(message = "Cv Must Not Be Blank")
+    private MultipartFile cv;
 
     private String accepted;
 

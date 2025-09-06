@@ -93,7 +93,7 @@ public class DoctorInfoTest {
 
         DoctorInfo doctorInfo=new DoctorInfo();
 
-        doctorInfo.setCv("publish");
+        doctorInfo.setCv("publish".getBytes());
 
         assertEquals("publish",doctorInfo.getCv());
 
@@ -106,7 +106,7 @@ public class DoctorInfoTest {
 
         DoctorInfo doctorInfo=new DoctorInfo();
 
-        doctorInfo.setCv("PENDING");
+        doctorInfo.setCv("PENDING".getBytes());
 
         assertEquals("PENDING",doctorInfo.getAccepted());
 
