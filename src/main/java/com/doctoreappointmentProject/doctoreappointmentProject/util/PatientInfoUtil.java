@@ -1,28 +1,36 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.util;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
+import com.doctoreappointmentProject.doctoreappointmentProject.repository.PatientInfoRepository;
+
 public class PatientInfoUtil {
 
 
-    public String validateBloodGroup(String bloodGroup)
-    {
 
-        if(bloodGroup==null || bloodGroup.isBlank())
-        {
+    public  static void validateBloodGroupOnlyLetter(String BloodGroup) {
 
-            return  "Blood group should not be empty";
+            if(!ValidationUtil.isOnlyLetters(BloodGroup)){
 
-        }
+                throw new
+                        IllegalArgumentException("Blood Group name should contain only letters");
 
-        if(bloodGroup.length() > 5)
-        {
+            }
 
-            return  "Blood Group Should Be less Than 5 characters";
+
+
 
         }
 
-        return null;
-    }
+        public static   void validatePatientNotExist(User user, PatientInfoRepository patientInfoRepository){
+
+            if (patientInfoRepository.existsByPatient(user)) {
+                throw new IllegalArgumentException("Patient info already exists for this user");
+            }
+
+
+        }
+
 
 
 

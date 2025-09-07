@@ -24,7 +24,7 @@ public class UserTest {
                 "ali@gmail.com",
                 "ali123",
                 "123",
-                "publish",
+                "[B@4b2bac3f".getBytes(),
                 Gender.MALE,role);
 
         assertEquals(1,user.getId());
@@ -122,14 +122,14 @@ public class UserTest {
     }
 
     @Test
-    @DisplayName("Test password Filed")
+    @DisplayName("Test Profile Filed")
     void testProfilePictureField(){
 
         User user=new User();
 
-        user.setProfilePicture("publish");
+        user.setProfilePicture("mp4.jpg".getBytes());
 
-        assertEquals("publish",user.getProfilePicture());
+        assertEquals("mp4.jpg",user.getProfilePicture());
 
     }
 

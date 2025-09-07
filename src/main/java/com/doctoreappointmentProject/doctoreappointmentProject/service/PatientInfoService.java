@@ -5,7 +5,7 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.PatientInfo
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.PatientInfoRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
-import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
+import com.doctoreappointmentProject.doctoreappointmentProject.util.PatientInfoUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,7 @@ public class PatientInfoService {
 
     private  final UserRepository userRepository;
 
+
     public PatientInfoService(PatientInfoRepository patientInfoRepository, UserRepository userRepository) {
 
         this.patientInfoRepository = patientInfoRepository;
@@ -27,21 +28,13 @@ public class PatientInfoService {
     public  void savePatientInfo(PatientInfoDTO patientInfoDTO){
 
 
-
-
         User user = userRepository.findById(Long.valueOf(patientInfoDTO.getUserId()))
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + patientInfoDTO.getUserId()));
 
-        if(!ValidationUtil.isOnlyLetters(patientInfoDTO.getBloodGroup())){
+        PatientInfoUtil.validateBloodGroupOnlyLetter(patientInfoDTO.getBloodGroup());
 
-            throw new
-                    IllegalArgumentException("Blood Group name should contain only letters");
+        PatientInfoUtil.validatePatientNotExist(user,patientInfoRepository);
 
-        }
-
-//        if (userRepository.existsById(user.getId())) {
-//            throw new IllegalArgumentException("user already exists");
-//        }
 
         PatientInfo patientInfo=new PatientInfo();
 
