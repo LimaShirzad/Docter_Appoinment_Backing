@@ -1,38 +1,36 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserSaveDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.mapper.UserMapper;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
-import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
+import exception.UserException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
+
+   private final UserRepository userRepository;
+
+   private final RoleRepository roleRepository;
+
+    private final UserMapper userMapper;
 
 
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.userMapper = userMapper;
+    }
 
-
-
-
-
-    @Transactional
+//    @Transactional
     public  void deleteUserById(Long id){
 
        if(!userRepository.existsById(id)) {
@@ -40,65 +38,25 @@ public class UserService {
             throw new RuntimeException("User Not Found Withe ID  " + id);
         }
 
+
         userRepository.deleteById(id);
 
     }
 
     public List<UserDTO> getAllUsers(){
 
-        List<User> users=userRepository.findAll();
+      return   userMapper.getAllUserMapper();
 
-        return  users.stream()
-                .map(user -> {
-
-                    UserDTO dto=new UserDTO();
-                    dto.setId(user.getId());
-                    dto.setFirstName(user.getFirstName());
-                    dto.setLastName(user.getLastName());
-                    dto.setEmail(user.getEmail());
-                    dto.setUserName(user.getUserName());
-//                    dto.setProfilePicture(Arrays.toString(user.getProfilePicture()));
-                    dto.setGender(user.getGender());
-
-//        =================form role entity===============
-                    if(user.getRole() !=null){
-
-                        dto.setRole(user.getRole().getRole());
-
-                    }
-                    return  dto;
-
-
-                }).collect(Collectors.toList());
 
     }
 
 
     public UserDTO getUserById(Long id) {
 
-
         User user= userRepository.findById(id)
-
                 .orElseThrow(() -> new RuntimeException("User not found With ID " + id));
 
-        UserDTO dto=new UserDTO();
-
-        dto.setId(user.getId());
-        dto.setFirstName(user.getFirstName());
-        dto.setLastName(user.getLastName());
-        dto.setEmail(user.getEmail());
-        dto.setUserName(user.getUserName());
-//        dto.setProfilePicture(user.getProfilePicture());
-        dto.setGender(user.getGender());
-
-//        =================form role entity===============
-        if(user.getRole() !=null){
-
-            dto.setRole(user.getRole().getRole());
-
-        }
-        return  dto;
-
+       return userMapper.getUserById(user);
 
 
     }
@@ -113,45 +71,26 @@ public class UserService {
     @Transactional
     public UserSaveDTO saveUser(UserSaveDTO dto) {
 
-        if(userRepository.existsByEmail(dto.getEmail())){
 
-            throw  new IllegalArgumentException("This Email is Already Exist");
+//       ==================validation for user filed=========
+        UserException.checkIfEmailExistThrowException(dto.getEmail());
 
-        }
+        UserException.checkIfUserNameExistThrowException(dto.getUserName());
 
-        if(userRepository.existsByPassword(dto.getPassword())){
+        UserException.checkIPasswordExistThrowException(dto.getPassword());
 
-            throw new IllegalArgumentException("This Password is Already Exist");
+//        =========================================================
 
-        }
+//        ==========================user mape to entity===========
+        User user=userMapper.toEntity(dto);
 
-        if(userRepository.existsByUserName(dto.getUserName())){
+//        UserUtil.isOnlyLetter(dto.getFirstName());
 
-            throw new IllegalArgumentException("This UserName is Already Exist");
+//        ===========saving data =======================
+        User savedUser=userRepository.save(user);
 
-        }
-
-
-        User user = new User();
-
-
-
-        user.setFirstName(dto.getFirstName());
-        user.setLastName(dto.getLastName());
-        user.setEmail(dto.getEmail());
-        user.setUserName(dto.getUserName());
-        user.setPassword(dto.getPassword());
-        user.setGender(dto.getGender());
-        user.setProfilePicture(dto.getProfilePictureUrl());
-
-        Roles role = roleRepository.findById((long) dto.getRoleId())
-                .orElseThrow(() -> new RuntimeException("Invalid Role ID"));
-        user.setRole(role);
-
-
-        userRepository.save(user);
-
-       return new UserSaveDTO(user.getId(), role.getId());
+//        =====================return user id and role id for login form===========
+        return new UserSaveDTO(user.getId(),savedUser.getRole().getId());
 
     }
 

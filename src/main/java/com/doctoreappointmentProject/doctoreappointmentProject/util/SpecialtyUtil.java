@@ -3,24 +3,16 @@ package com.doctoreappointmentProject.doctoreappointmentProject.util;
 public class SpecialtyUtil {
 
 
-    public static String validateTitle(String title)
+    public static void isOnlyLetters(String title)
     {
 
-        if(title==null || title.isBlank())
-        {
+        if(!ValidationUtil.isOnlyLetters(title)){
 
-               return  "Title should not be empty";
-
-        }
-
-        if(title.length() > 150)
-        {
-
-            return  "title should not be greater than 150 characters";
+            throw new
+                    IllegalArgumentException("Specialty name should contain only letters");
 
         }
 
-        return  null;
 
     }
 

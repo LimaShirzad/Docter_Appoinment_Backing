@@ -5,7 +5,9 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Specialty;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.SpecialtyRepository;
+import com.doctoreappointmentProject.doctoreappointmentProject.util.SpecialtyUtil;
 import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
+import exception.SpecialtyException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.cache.annotation.CacheEvict;
@@ -28,16 +30,14 @@ public class SpecialtyService {
 
     }
 
-    @Transactional
-    @CachePut(value = "specialties", key = "#specialty.id")
+//    @Transactional
+//    @CachePut(value = "specialties", key = "#specialty.id")
     public void saveSpecialty(Specialty specialty){
 
-        if(!ValidationUtil.isOnlyLetters(specialty.getTitle())){
+        SpecialtyUtil.isOnlyLetters(specialty.getTitle());
 
-            throw new
-                    IllegalArgumentException("Specialty name should contain only letters");
+//        SpecialtyException.checkIfSpecialtyIsAlreadyExist(specialty.getTitle());
 
-        }
 
         if(specialtyRepository.existsByTitle(specialty.getTitle())){
 
@@ -49,7 +49,7 @@ public class SpecialtyService {
 
     }
 
-    @CacheEvict(value = "specialties", key = "#id")
+//    @CacheEvict(value = "specialties", key = "#id")
     public void deleteSpecialtyById(Long id){
 
          specialtyRepository.deleteById(id);
@@ -58,7 +58,7 @@ public class SpecialtyService {
     }
 
     @Transactional
-    @Cacheable(value = "specialties", key = "#id")
+//    @Cacheable(value = "specialties", key = "#id")
     public Specialty getSpecialtyById(Long id) {
 
              return specialtyRepository.findById(id)
@@ -73,7 +73,7 @@ public class SpecialtyService {
     }
 
     @Transactional
-    @CachePut(value = "specialties", key = "#id")
+//    @CachePut(value = "specialties", key = "#id")
     public Specialty updateSpecialtyById(Long id,  Specialty updateSpecialty) {
 
 
