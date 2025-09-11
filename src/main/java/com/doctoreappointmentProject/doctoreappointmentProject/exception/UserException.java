@@ -1,4 +1,4 @@
-package exception;
+package com.doctoreappointmentProject.doctoreappointmentProject.exception;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 public class UserException {
 
 
-    private static  UserRepository userRepository;
-    private static  RoleRepository roleRepository;
+    private   UserRepository userRepository;
+    private   RoleRepository roleRepository;
 
     public UserException(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
-    public static   void checkIfEmailExistThrowException(String email){
+    public    void checkIfEmailExistThrowException(String email){
 
         if(userRepository.existsByEmail(email)){
 
@@ -26,7 +26,7 @@ public class UserException {
 
     }
 
-    public static void checkIPasswordExistThrowException(String password){
+    public  void checkIPasswordExistThrowException(String password){
 
         if(userRepository.existsByPassword(password)){
 
@@ -37,7 +37,7 @@ public class UserException {
 
     }
 
-    public static void checkIfUserNameExistThrowException(String username){
+    public  void checkIfUserNameExistThrowException(String username){
 
         if(userRepository.existsByUserName(username)){
 

@@ -1,18 +1,10 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 
 
-import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Specialty;
-import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.SpecialtyRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.util.SpecialtyUtil;
-import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
-import exception.SpecialtyException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

@@ -6,22 +6,17 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+
 public class UserMapper {
-
-    private  final RoleRepository roleRepository;
-    private final UserRepository userRepository;
-
-    public UserMapper(RoleRepository roleRepository, UserRepository userRepository) {
-        this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
-    }
-
 
     public User toEntity(UserSaveDTO userSaveDTO){
 
@@ -36,10 +31,6 @@ public class UserMapper {
         user.setGender(userSaveDTO.getGender());
         user.setProfilePicture(userSaveDTO.getProfilePictureUrl());
 
-
-        Roles role = roleRepository.findById((long) userSaveDTO.getRoleId())
-                .orElseThrow(() -> new RuntimeException("Invalid Role ID"));
-        user.setRole(role);
 
         return user;
 
@@ -62,35 +53,35 @@ public class UserMapper {
 //
 //    }
 
-    public List<UserDTO> getAllUserMapper(){
+//    public List<UserDTO> getAllUserMapper(){
 
-        List<User> users=userRepository.findAll();
-        return  users.stream()
-                .map(user -> {
+//        List<User> users=userRepository.findAll();
+//        return  users.stream()
+//                .map(user -> {
+//
+//
+//                    UserDTO dto=new UserDTO();
+//                    dto.setId(user.getId());
+//                    dto.setFirstName(user.getFirstName());
+//                    dto.setLastName(user.getLastName());
+//                    dto.setEmail(user.getEmail());
+//                    dto.setUserName(user.getUserName());
+////                    dto.setProfilePicture(user.getProfilePicture());
+//                    dto.setGender(user.getGender());
+//
+////        =================form role entity===============
+//                    if(user.getRole() !=null){
+//
+//                        dto.setRole(user.getRole().getRole());
+//                        dto.setRoleID(user.getId());
+//
+//                    }
+//                    return  dto;
+//
+//
+//                }).collect(Collectors.toList());
 
-
-                    UserDTO dto=new UserDTO();
-                    dto.setId(user.getId());
-                    dto.setFirstName(user.getFirstName());
-                    dto.setLastName(user.getLastName());
-                    dto.setEmail(user.getEmail());
-                    dto.setUserName(user.getUserName());
-//                    dto.setProfilePicture(user.getProfilePicture());
-                    dto.setGender(user.getGender());
-
-//        =================form role entity===============
-                    if(user.getRole() !=null){
-
-                        dto.setRole(user.getRole().getRole());
-                        dto.setRoleID(user.getId());
-
-                    }
-                    return  dto;
-
-
-                }).collect(Collectors.toList());
-
-    }
+//    }
 
     public UserDTO getUserById(User user){
 

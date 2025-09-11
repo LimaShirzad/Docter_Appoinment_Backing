@@ -6,11 +6,12 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
-import exception.UserException;
+import com.doctoreappointmentProject.doctoreappointmentProject.exception.UserException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,11 +24,14 @@ public class UserService {
 
     private final UserMapper userMapper;
 
+    private final UserException userException;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper) {
+
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper, UserException userException) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userMapper = userMapper;
+        this.userException = userException;
     }
 
 //    @Transactional
@@ -45,7 +49,37 @@ public class UserService {
 
     public List<UserDTO> getAllUsers(){
 
-      return   userMapper.getAllUserMapper();
+
+
+        List<User> users=userRepository.findAll();
+        return  users.stream()
+                .map(user -> {
+
+
+                    UserDTO dto=new UserDTO();
+                    dto.setId(user.getId());
+                    dto.setFirstName(user.getFirstName());
+                    dto.setLastName(user.getLastName());
+                    dto.setEmail(user.getEmail());
+                    dto.setUserName(user.getUserName());
+//                    dto.setProfilePicture(user.getProfilePicture());
+                    dto.setGender(user.getGender());
+
+//        =================form role entity===============
+                    if(user.getRole() !=null){
+
+                        dto.setRole(user.getRole().getRole());
+                        dto.setRoleID(user.getId());
+
+                    }
+                    return  dto;
+
+
+                }).collect(Collectors.toList());
+
+//      List<User> users=userRepository.findAll();
+//
+//      return   userMapper.getAllUserMapper();
 
 
     }
@@ -73,16 +107,21 @@ public class UserService {
 
 
 //       ==================validation for user filed=========
-        UserException.checkIfEmailExistThrowException(dto.getEmail());
+        userException.checkIfEmailExistThrowException(dto.getEmail());
 
-        UserException.checkIfUserNameExistThrowException(dto.getUserName());
+        userException.checkIfUserNameExistThrowException(dto.getUserName());
 
-        UserException.checkIPasswordExistThrowException(dto.getPassword());
+        userException.checkIPasswordExistThrowException(dto.getPassword());
 
 //        =========================================================
 
 //        ==========================user mape to entity===========
         User user=userMapper.toEntity(dto);
+
+
+        Roles role = roleRepository.findById((long) dto.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Invalid Role ID"));
+        user.setRole(role);
 
 //        UserUtil.isOnlyLetter(dto.getFirstName());
 

@@ -1,4 +1,4 @@
-package exception;
+package com.doctoreappointmentProject.doctoreappointmentProject.exception;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.SpecialtyRepository;
 import org.springframework.stereotype.Component;
