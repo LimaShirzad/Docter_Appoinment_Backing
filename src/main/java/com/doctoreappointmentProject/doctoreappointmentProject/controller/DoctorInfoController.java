@@ -41,10 +41,6 @@ public class DoctorInfoController {
                                                            @RequestParam(value = "cv",required = false) MultipartFile cv) throws IOException {
 
 
-//            dto.setProfilePictureUrl(profilePicture.getBytes());
-
-//            doctorInfoSaveDTO.setCv(cv.getBytes());
-//            byte[] cvBytes = doctorInfoSaveDTO.getCv().getBytes();
 
             doctorInfoService.saveDoctorInfo(doctorInfoSaveDTO);
 
