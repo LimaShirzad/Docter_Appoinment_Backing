@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorInfoSaveDTO {
+public class DoctorInfoDTO {
 
     private int id;
 

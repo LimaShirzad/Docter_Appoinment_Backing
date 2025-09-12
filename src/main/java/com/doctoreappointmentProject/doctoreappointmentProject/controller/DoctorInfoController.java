@@ -1,7 +1,6 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
-import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoSaveDTO;
-import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserSaveDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.DoctorInfoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class DoctorInfoController {
     }
 
     @GetMapping
-    public List<DoctorInfoSaveDTO> getDoctor(){
+    public List<DoctorInfoDTO> getDoctor(){
 
        return doctorInfoService.getAllDoctors();
 
@@ -37,7 +36,7 @@ public class DoctorInfoController {
 
 
         @PostMapping("/save")
-    public ResponseEntity<Map<String,String>> createDoctor(@Valid @ModelAttribute DoctorInfoSaveDTO doctorInfoSaveDTO,
+    public ResponseEntity<Map<String,String>> createDoctor(@Valid @ModelAttribute DoctorInfoDTO doctorInfoSaveDTO,
                                                            @RequestParam(value = "cv",required = false) MultipartFile cv) throws IOException {
 
 

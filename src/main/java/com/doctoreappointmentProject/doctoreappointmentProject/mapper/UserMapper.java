@@ -93,7 +93,6 @@ public class UserMapper {
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());
         dto.setUserName(user.getUserName());
-//        dto.setProfilePicture(user.getProfilePicture());
         dto.setGender(user.getGender());
 
 //        =================form role entity===============
