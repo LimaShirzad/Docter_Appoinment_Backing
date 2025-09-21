@@ -4,6 +4,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -73,16 +74,35 @@ public class GlobalExceptionHandler {
         ));
     }
 
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<Map<String,String>> handleDataIntegrityViolation(DataIntegrityViolationException ex){
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String,String>> handleDataIntegrityViolation(DataIntegrityViolationException ex){
+
+        Map<String,String> error=new HashMap<>();
+
+        error.put("error","You can Not Delete This Record Because It is Referenced in another table!");
+
+        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public  ResponseEntity<?> handleBadCredentials(BadCredentialsException ex){
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("BadCredential","Invalid UserName and Password"));
+
+    }
+
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<?> handleRuntime(RuntimeException ex){
 //
-//        Map<String,String> error=new HashMap<>();
-//
-//        error.put("error","You can Not Delete This Record Because It is Referenced in another table!");
-//
-//        return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
+//        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error","somthing went wrong","details",ex.getMessage()));
 //
 //    }
+
+
+
+
 
 }
 

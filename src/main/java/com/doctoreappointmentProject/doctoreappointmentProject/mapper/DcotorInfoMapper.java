@@ -42,6 +42,8 @@ public class DcotorInfoMapper {
         dto.setAddress(doctorInfo.getAddress());
         // dto.setCv(doctorInfo.getCv());
         dto.setAccepted(doctorInfo.getAccepted());
+        dto.setUserId(doctorInfo.getDoctor().getId());
+        dto.setSpecialtyId(doctorInfo.getSpecialty().getId());
         return dto;
     }
 

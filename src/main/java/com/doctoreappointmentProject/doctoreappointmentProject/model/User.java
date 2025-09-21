@@ -69,7 +69,7 @@ public class User {
 //    ===================password==================
 //length should not be define
     @NotBlank(message = "password should not be empty")
-    @Column(name="password",nullable = false,unique = true)
+    @Column(name="password",nullable = false)
 //    @JsonProperty("password")
     private  String password;
 

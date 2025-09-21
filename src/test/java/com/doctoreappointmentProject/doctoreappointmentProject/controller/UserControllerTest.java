@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-
+//@Import(TestSecurityConfigration.class)
 @WebMvcTest(UserController.class)
 @DisplayName("Tets UserController")
 public class UserControllerTest {

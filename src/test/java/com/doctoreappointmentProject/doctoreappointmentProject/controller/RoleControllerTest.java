@@ -1,16 +1,15 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
+import com.doctoreappointmentProject.doctoreappointmentProject.TestSecurityConfiguration;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.RoleService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.mockito.Mockito.*;
@@ -25,7 +24,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 
 
-
+@Import(TestSecurityConfiguration.class)
 @WebMvcTest(RoleController.class)
 @DisplayName("Tets RoleController")
 public class RoleControllerTest {

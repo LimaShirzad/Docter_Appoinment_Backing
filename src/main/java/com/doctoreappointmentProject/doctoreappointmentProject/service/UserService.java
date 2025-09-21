@@ -10,6 +10,8 @@ import com.doctoreappointmentProject.doctoreappointmentProject.exception.UserExc
 import jakarta.transaction.Transactional;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,7 @@ public class UserService {
 
     private final UserException userException;
 
-//    private  final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+    private  final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper, UserException userException) {
@@ -122,7 +124,7 @@ public class UserService {
 //        ==========================user mape to entity===========
         User user=userMapper.toEntity(dto);
 
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 
         Roles role = roleRepository.findById((long) dto.getRoleId())

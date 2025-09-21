@@ -4,6 +4,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.DashBoardService;
 //import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,26 +38,6 @@ public class DashBoardController {
         return dashBoardService.getTotalDoctor();
 
     }
-
-//    @GetMapping("/data")
-//    public Map<String,String> getDasbord(Authentication authentication){
-//
-//        System.out.println(authentication);
-//
-//        Map<String ,String > response=new HashMap<>();
-//
-//        if(authentication==null){
-//              response.put("error","nO login");
-//              return response;
-//        }
-//
-//        response.put("username",authentication.getName());
-//
-//        return  response;
-//
-//
-//    }
-
 
 
 
