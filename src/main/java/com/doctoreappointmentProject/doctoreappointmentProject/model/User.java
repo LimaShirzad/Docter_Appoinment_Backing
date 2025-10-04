@@ -101,7 +101,9 @@ public class User {
     public  void preSave() {
 
         this.firstName = ValidationUtil.cleanString(this.firstName);
+        this.lastName = ValidationUtil.cleanString(this.lastName);
         this.lastName = ValidationUtil.capitalizeFirstLetter(this.lastName);
+        this.firstName = ValidationUtil.capitalizeFirstLetter(this.firstName);
 
     }
 

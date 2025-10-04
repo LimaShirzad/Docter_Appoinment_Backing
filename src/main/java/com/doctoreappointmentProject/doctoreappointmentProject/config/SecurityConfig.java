@@ -42,6 +42,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception
     {
+//        /api/client
         http
                 .csrf().disable()
                 .cors().and()
@@ -50,8 +51,10 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/api/dashboard/**").permitAll()
                                 .requestMatchers("/api/user/**").permitAll()
+                                .requestMatchers("/api/client/**").permitAll()
                                 .requestMatchers("/api/specialty/all_Specialty").permitAll()
                                 .requestMatchers("/api/doctors/save").permitAll()
+                                .requestMatchers("/api/doctors/**").permitAll()
                                 .requestMatchers("/api/doctors/profile").hasRole("DOTOR") // ⬅️ دا اضافه کړ
                                 .requestMatchers("/api/patient/save").permitAll()
 

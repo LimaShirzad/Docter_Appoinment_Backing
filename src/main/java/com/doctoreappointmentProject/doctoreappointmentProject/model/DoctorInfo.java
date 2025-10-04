@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.model;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.util.ValidationUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -92,6 +93,23 @@ public class DoctorInfo {
     @ManyToOne
     @JoinColumn(name="specialty_id",referencedColumnName = "id",nullable = false)
     private  Specialty specialty;
+
+
+    @PrePersist
+    @PreUpdate
+
+    public  void preSave() {
+
+        this.education = ValidationUtil.cleanString(this.education);
+        this.universityName = ValidationUtil.cleanString(this.universityName);
+        this.education = ValidationUtil.capitalizeFirstLetter(this.education);
+        this.universityName = ValidationUtil.capitalizeFirstLetter(this.universityName);
+
+    }
+
+
+
+
 
 
 }

@@ -1,6 +1,10 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.PatientInfoDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.PatientInfoProfileDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.mapper.PateintInfoMapper;
+import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.PatientInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.PatientInfoRepository;
@@ -17,11 +21,14 @@ public class PatientInfoService {
 
     private  final UserRepository userRepository;
 
+    private final PateintInfoMapper pateintInfoMapper;
 
-    public PatientInfoService(PatientInfoRepository patientInfoRepository, UserRepository userRepository) {
+
+    public PatientInfoService(PatientInfoRepository patientInfoRepository, UserRepository userRepository, PateintInfoMapper pateintInfoMapper) {
 
         this.patientInfoRepository = patientInfoRepository;
         this.userRepository = userRepository;
+        this.pateintInfoMapper = pateintInfoMapper;
     }
 
     @Transactional
@@ -45,7 +52,16 @@ public class PatientInfoService {
         patientInfoRepository.save(patientInfo);
 
 
+    }
 
+    public PatientInfoProfileDTO getPatientProfile(String username) {
+        User user = userRepository.findByUserName(username)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        PatientInfo patientInfo = patientInfoRepository.findByPatient(user)
+                .orElseThrow(() -> new RuntimeException("patient profile not found"));
+
+        return pateintInfoMapper.toDTO(user, patientInfo);
     }
 
 

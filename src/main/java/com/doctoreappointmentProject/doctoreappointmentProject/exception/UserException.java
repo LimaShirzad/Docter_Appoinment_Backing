@@ -26,7 +26,7 @@ public class UserException {
 
     }
 
-    public  void checkIPasswordExistThrowException(String password){
+    public  void checkIfPasswordExistThrowException(String password){
 
         if(userRepository.existsByPassword(password)){
 

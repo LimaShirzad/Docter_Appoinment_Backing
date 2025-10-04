@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.DoctorInfoRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,8 +46,7 @@ public class DoctorInfoController {
 
     }
 
-
-        @PostMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity<Map<String,String>> createDoctor(@Valid @ModelAttribute DoctorInfoDTO doctorInfoSaveDTO,
                                                            @RequestParam(value = "cv",required = false) MultipartFile cv) throws IOException {
 
@@ -62,71 +63,14 @@ public class DoctorInfoController {
 
         }
 
-//
-//    @GetMapping("/me")
-//    public ResponseEntity<?> getDoctorProfile(Authentication authentication) {
-//        if (authentication == null) {
-//            return ResponseEntity.status(401).body(Map.of("error", "Unauthorized"));
-//        }
-//
-//        String username = authentication.getName();
-//        User user = userRepository.findByUserName(username)
-//                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-//
-//        return ResponseEntity.ok(Map.of(
-//                "id", user.getId(),
-//                "username", user.getUserName(),
-//                "role", user.getRole().getRole()
-//        ));
-//    }
-
-        @GetMapping("/profile")
-        public  ResponseEntity<?> getDoctorProfile(Authentication authentication)
-        {
-            String username=authentication.getName();
-
-            User user=userRepository.findByUserName(username).orElseThrow(()-> new RuntimeException("Doctor not found"));
-
-            return  ResponseEntity.ok(user);
-
-//            return ResponseEntity.ok(Map.of(
-//
-//                    "id",user.getId(),
-//                    "username",user.getUserName(),
-//                    "role",user.getRole().getRole()
-//
-//
-//            ));
-
-//
-        }
 
 
-
-//@GetMapping("/me")
-//public ResponseEntity<?> getDoctorProfile(Authentication authentication) {
-//    if (authentication == null) {
-//        return ResponseEntity.status(401).body(Map.of("error", "Unauthorized"));
-//    }
-//
-//    String username = authentication.getName();
-//    User user = userRepository.findByUserName(username)
-//            .orElseThrow(() -> new RuntimeException("Doctor not found"));
-//
-//    return ResponseEntity.ok(Map.of(
-//            "id", user.getId(),
-//            "username", user.getUserName(),
-//            "role", user.getRole().getRole()
-//    ));
-//}
-
-
-
-
-
-
-
-
+    @GetMapping("/profile")
+    public ResponseEntity<?> getDoctorProfile(Authentication authentication) {
+        String username = authentication.getName();
+        DoctorProfileDTO profile = doctorInfoService.getDoctorProfile(username);
+        return ResponseEntity.ok(profile);
+    }
 
 
 }

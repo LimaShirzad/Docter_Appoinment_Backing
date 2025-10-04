@@ -55,8 +55,6 @@ public class UserService {
 
     public List<UserDTO> getAllUsers(){
 
-
-
         List<User> users=userRepository.findAll();
         return  users.stream()
                 .map(user -> {
@@ -117,7 +115,7 @@ public class UserService {
 
         userException.checkIfUserNameExistThrowException(dto.getUserName());
 
-        userException.checkIPasswordExistThrowException(dto.getPassword());
+        userException.checkIfPasswordExistThrowException(dto.getPassword());
 
 //        =========================================================
 

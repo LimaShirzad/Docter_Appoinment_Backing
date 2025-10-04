@@ -1,10 +1,13 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.PatientInfoDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.PatientInfoProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.PatientInfoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +40,13 @@ public class PatientInfoController {
 
     }
 
-//    @DeleteMapping("/{id}")
 
-
+    @GetMapping("/profile")
+    public ResponseEntity<?> getPateintProfile(Authentication authentication) {
+        String username = authentication.getName();
+        PatientInfoProfileDTO profile = patientInfoService.getPatientProfile(username);
+        return ResponseEntity.ok(profile);
+    }
 
 
 

@@ -1,10 +1,15 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.dto;
+import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -16,6 +21,9 @@ import java.time.LocalDate;
 public class DoctorInfoDTO {
 
     private int id;
+
+
+
 
     @Size(max=255,message = "education must be less than 255")
     @NotBlank(message = "must not be empty")
@@ -31,6 +39,7 @@ public class DoctorInfoDTO {
 
 
     @NotNull(message = "the Data filed must not be blank")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate graduationYear;
 
     @Size(max=500,message = "address should not be greater than 500")
@@ -38,7 +47,7 @@ public class DoctorInfoDTO {
     private String address;
 
     @NotNull(message = "Cv Must Not Be Blank")
-    private MultipartFile cv;
+    private  MultipartFile cv;
 
     private String accepted;
 
@@ -46,6 +55,8 @@ public class DoctorInfoDTO {
     private Integer userId;
 
     private int specialtyId;
+
+//    private  String specialtyName;
 
 
 

@@ -43,7 +43,7 @@ public class UserController {
             @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture) throws IOException {
 
 
-       dto.setProfilePictureUrl(profilePicture.getBytes());
+        dto.setProfilePictureUrl(profilePicture.getBytes());
 
         UserSaveDTO savedUserDTO = userService.saveUser(dto);
 
