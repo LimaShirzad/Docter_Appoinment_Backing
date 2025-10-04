@@ -22,7 +22,9 @@ public class ClientService {
     }
 
 
+    public DoctorInfoClientDTO getDoctorById(int id) {
 
-
-
+        return doctorInfoRepository.findDoctorById(id)
+                .orElseThrow(() -> new RuntimeException("Doctor not found with id: " + id));
+    }
 }

@@ -4,6 +4,7 @@ import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoCli
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.DoctorInfoRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.ClientService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,16 @@ public class ClientController {
       return clientService.getAllDoctor();
 
     }
+
+    @GetMapping("/{id}")
+    public DoctorInfoClientDTO getDoctorById(@PathVariable int id) {
+        return clientService.getDoctorById(id);
+    }
+
+
+
+
+
 
 
 

@@ -5,6 +5,7 @@ import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,6 +34,27 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Integer> 
             "JOIN d.doctor u " +     // relationship field نوم doctor دی
             "JOIN d.specialty s")
     List<DoctorInfoClientDTO> findAllDoctor();
+
+
+    @Query("SELECT new com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO(" +
+            "u.id, " +
+            "u.firstName, " +
+            "u.lastName, " +
+            "u.email, " +
+            "s.title, " +
+            "d.education, " +
+            "d.experienceYear, " +
+            "d.universityName, " +
+            "d.graduationYear, " +
+            "d.address, " +
+            "u.profilePicture" +
+            ") " +
+            "FROM DoctorInfo d " +
+            "JOIN d.doctor u " +
+            "JOIN d.specialty s " +
+            "WHERE u.id = :id")
+    Optional<DoctorInfoClientDTO> findDoctorById(@Param("id") int id);
+
 
 
 }
