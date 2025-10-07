@@ -67,7 +67,7 @@ public class TestUserService {
         assertEquals("Sherzad",dto1.getLastName());
         assertEquals("ali@gamil.com",dto1.getEmail());
         assertEquals("ali123",dto1.getUserName());
-        assertEquals("ali.pic",dto1.getProfilePicture());
+        assertEquals("null",dto1.getProfilePicture());
         assertEquals(Gender.MALE,dto1.getGender());
         assertEquals("Admin",dto1.getRole());
 
@@ -97,7 +97,7 @@ public class TestUserService {
         role2.setId(2);
         role2.setRole("User");
 
-       User user = new User(Math.toIntExact(1L), "Ali", "Sherzad", "ali@gamil.com", "ali123","1234", "ali.pic".getBytes(), Gender.MALE, role2);
+       User user = new User(Math.toIntExact(1L), "Ali", "Sherzad", "ali@gamil.com", "ali123","1234","pic.jpg".getBytes(), Gender.MALE, role2);
 
        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 

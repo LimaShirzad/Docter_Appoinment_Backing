@@ -37,28 +37,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
             String username = JwtUtil.getUserNameFromToken(token);
 
-            // ✅ Only if username exists and no authentication yet
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                // Load user details from DB
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                // ✅ Here is where your lines go:
                 String role = JwtUtil.getRoleFromToken(token);
                 List<SimpleGrantedAuthority> authorities = List.of(
                         new SimpleGrantedAuthority("ROLE_" + role.toUpperCase())
                 );
+
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // Set authentication in context
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
 
-        // Continue filter chain
         filterChain.doFilter(request, response);
     }
 

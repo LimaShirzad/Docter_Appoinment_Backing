@@ -49,14 +49,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth->
                         auth.requestMatchers("/api/user/save").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/api/dashboard/**").permitAll()
-                                .requestMatchers("/api/user/**").permitAll()
+//                                .requestMatchers("/api/dashboard/**").hasRole("ADMIN")
+
+//                                .requestMatchers("/api/user/save").permitAll()
+                                .requestMatchers("/api/user/roles").permitAll()
                                 .requestMatchers("/api/client/**").permitAll()
                                 .requestMatchers("/api/specialty/all_Specialty").permitAll()
                                 .requestMatchers("/api/doctors/save").permitAll()
                                 .requestMatchers("/api/doctors/**").permitAll()
-                                .requestMatchers("/api/doctors/profile").hasRole("DOTOR") // ⬅️ دا اضافه کړ
+
+                                .requestMatchers("/api/doctors/profile").hasRole("DOCTOR")
                                 .requestMatchers("/api/patient/save").permitAll()
+
+                                .requestMatchers("/api/dashboard/**").hasRole("ADMIN")
+                                .requestMatchers("/api/roles/**").hasRole("ADMIN")
+                                .requestMatchers("/api/specialty/**").hasRole("ADMIN")
 
                                 .anyRequest().authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

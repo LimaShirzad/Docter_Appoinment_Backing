@@ -33,24 +33,10 @@ public class MyUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUserName())
                 .password(user.getPassword())
-                .roles(role)  // Spring will add "ROLE_" prefix automatically
+                .roles(role)
                 .build();
 
-//
-//        return  org.springframework.security.core.userdetails.User
-//                .withUsername(user.getUserName())
-//                .password(user.getPassword())
-//               .roles(user.getRole().getRole())
-//                .build();
 
-
-//        return new  org.springframework.security.core.userdetails.User(
-//                user.getUserName(),
-//                user.getPassword(),
-//                new ArrayList<>()
-//
-//        );
-//
 
     }
 

@@ -18,18 +18,11 @@ public class AuthService {
 
 
     private  final AuthenticationManager authenticationManager;
-
-    private final HttpSession session;
-
-//    private  final JwtUtil jwtUtil;
-
     private  final UserRepository userRepository;
 
-    public AuthService(AuthenticationManager authenticationManager, HttpSession session, UserRepository userRepository) {
+    public AuthService(AuthenticationManager authenticationManager, UserRepository userRepository) {
 
         this.authenticationManager = authenticationManager;
-        this.session = session;
-//        this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
     }
 
@@ -62,24 +55,8 @@ public class AuthService {
 
 
 
-//
-//        }catch (BadCredentialsException e){
-//
-//            throw  new RuntimeException("invalid UserName or Password");
-//        }
 
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
