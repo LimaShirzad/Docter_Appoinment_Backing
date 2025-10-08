@@ -37,14 +37,11 @@ public class AuthService {
             );
 
 
-
             User user=userRepository.findByUserName(username)
                     .orElseThrow(()-> new RuntimeException("User Not Found"));
 
 
-
             String token=JwtUtil.generateToken(user.getUserName(), (long) user.getId(),user.getRole().getRole());
-
 
 
             return Map.of("token",token,

@@ -2,6 +2,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.PatientInfoDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.PatientInfoProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.PatientInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
@@ -16,12 +17,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import static org.mockito.ArgumentMatchers.any;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,7 +50,6 @@ public class PatientInfoControllerTest {
 
 
         PatientInfoDTO patientInfoDTO=new PatientInfoDTO();
-
 
         patientInfoDTO.setId(1);
         patientInfoDTO.setBloodGroup("A");
@@ -102,8 +103,32 @@ public class PatientInfoControllerTest {
         }
 
 
+    @Test
+    void testGetPatientProfile() throws Exception {
+        // Arrange
+        String username = "testpatient";
 
+        // Mock profile DTO
+        PatientInfoProfileDTO profileDTO = new PatientInfoProfileDTO();
+        profileDTO.setId(1);
+        profileDTO.setFirstName("me sherzad");
+        profileDTO.setEmail("mesherzad@gamil.com");
 
+        // Mock service
+        when(patientInfoService.getPatientProfile(username)).thenReturn(profileDTO);
 
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn(username);
+
+        // Perform request using MockMvc
+        mockMvc.perform(get("/api/patient/profile")
+                        .principal(authentication) // pass Authentication object
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.firstName").value("me sherzad"))
+//                .andExpect(jsonPath("$.la").value("John Doe"))
+                .andExpect(jsonPath("$.email").value("mesherzad@gamil.com"));
+    }
 
 }
