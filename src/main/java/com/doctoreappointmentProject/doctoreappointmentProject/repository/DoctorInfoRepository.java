@@ -3,6 +3,8 @@ package com.doctoreappointmentProject.doctoreappointmentProject.repository;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -26,12 +28,14 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Integer> 
             "d.education, " +
             "d.experienceYear, " +
             "d.universityName, " +
+            "d.accepted, " +
             "d.graduationYear, " +
             "d.address, " +
-            "u.profilePicture" +     // profilePicture له User entity نه اخلو
+            "u.gender, " +
+            "u.profilePicture" +
             ") " +
             "FROM DoctorInfo d " +
-            "JOIN d.doctor u " +     // relationship field نوم doctor دی
+            "JOIN d.doctor u " +
             "JOIN d.specialty s")
     List<DoctorInfoClientDTO> findAllDoctor();
 
@@ -45,8 +49,10 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Integer> 
             "d.education, " +
             "d.experienceYear, " +
             "d.universityName, " +
+            "d.accepted, " +
             "d.graduationYear, " +
             "d.address, " +
+            "u.gender, " +
             "u.profilePicture" +
             ") " +
             "FROM DoctorInfo d " +
@@ -56,5 +62,10 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Integer> 
     Optional<DoctorInfoClientDTO> findDoctorById(@Param("id") int id);
 
 
+
+    Page<DoctorInfo> findAll(Pageable pageable);
+
+
+        Optional<DoctorInfo> findByDoctorId(Long userId);
 
 }

@@ -1,25 +1,19 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.mapper;
 
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.AdminProfileDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserSaveDTO;
-import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
+import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
-import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
-import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 
 public class UserMapper {
 
-    public User toEntity(UserSaveDTO userSaveDTO){
 
+    public User toEntity(UserSaveDTO userSaveDTO){
 
         User user = new User();
 
@@ -31,57 +25,9 @@ public class UserMapper {
         user.setGender(userSaveDTO.getGender());
         user.setProfilePicture(userSaveDTO.getProfilePictureUrl());
 
-
         return user;
 
     }
-
-//    public  UserSaveDTO toDto(User user){
-//
-//        UserSaveDTO userSaveDTO=new UserSaveDTO();
-//
-//        userSaveDTO.setFirstName(user.getFirstName());
-//        userSaveDTO.setLastName(user.getLastName());
-//        userSaveDTO.setEmail(user.getEmail());
-//        userSaveDTO.setUserName(user.getUserName());
-//        userSaveDTO.setPassword(user.getPassword());
-//        userSaveDTO.setGender(user.getGender());
-//        userSaveDTO.setProfilePictureUrl(user.getProfilePicture());
-//
-//        return  userSaveDTO;
-//
-//
-//    }
-
-//    public List<UserDTO> getAllUserMapper(){
-
-//        List<User> users=userRepository.findAll();
-//        return  users.stream()
-//                .map(user -> {
-//
-//
-//                    UserDTO dto=new UserDTO();
-//                    dto.setId(user.getId());
-//                    dto.setFirstName(user.getFirstName());
-//                    dto.setLastName(user.getLastName());
-//                    dto.setEmail(user.getEmail());
-//                    dto.setUserName(user.getUserName());
-////                    dto.setProfilePicture(user.getProfilePicture());
-//                    dto.setGender(user.getGender());
-//
-////        =================form role entity===============
-//                    if(user.getRole() !=null){
-//
-//                        dto.setRole(user.getRole().getRole());
-//                        dto.setRoleID(user.getId());
-//
-//                    }
-//                    return  dto;
-//
-//
-//                }).collect(Collectors.toList());
-
-//    }
 
     public UserDTO getUserById(User user){
 
@@ -95,7 +41,6 @@ public class UserMapper {
         dto.setUserName(user.getUserName());
         dto.setGender(user.getGender());
 
-//        =================form role entity===============
         if(user.getRole() !=null){
 
             dto.setRole(user.getRole().getRole());
@@ -104,12 +49,57 @@ public class UserMapper {
 
         return  dto;
 
+    }
+
+    public AdminProfileDTO getAdminProfile(User user){
+
+        AdminProfileDTO adminProfileDTO=new AdminProfileDTO();
+
+
+        adminProfileDTO.setId(user.getId());
+        adminProfileDTO.setFirstName(user.getFirstName());
+        adminProfileDTO.setLastName(user.getLastName());
+        adminProfileDTO.setEmail(user.getEmail());
+        adminProfileDTO.setUsername(user.getUserName());
+        adminProfileDTO.setGender(user.getGender());
+        adminProfileDTO.setPassword(user.getPassword());
+        adminProfileDTO.setProfilePicture(user.getProfilePicture());
+
+//        =================form role entity===============
+        if(user.getRole() !=null){
+
+            adminProfileDTO.setRole(user.getRole().getRole());
+
+        }
+
+        return  adminProfileDTO;
+
 
     }
 
 
+    public DoctorInfoClientDTO getDocoterByIdMapper(User user, DoctorInfo doctorInfo) {
+
+        DoctorInfoClientDTO dto=new DoctorInfoClientDTO();
+
+        dto.setId(user.getId());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setSpecialty(doctorInfo.getSpecialty().getTitle());
+        dto.setEducation(doctorInfo.getEducation());
+        dto.setAddress(doctorInfo.getAddress());
+        dto.setGraduationYear(doctorInfo.getGraduationYear());
+        dto.setExperienceYear(doctorInfo.getExperienceYear());
+        dto.setUniversityName(doctorInfo.getUniversityName());
+        dto.setAccepted(doctorInfo.getAccepted());
+        dto.setProfilePicture(user.getProfilePicture());
+        dto.setGender(user.getGender());
+
+
+        return  dto;
 
 
 
-
+    }
 }

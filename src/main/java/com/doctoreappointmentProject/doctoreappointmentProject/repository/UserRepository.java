@@ -1,5 +1,6 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.repository;
 
+import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByUserName(String username);
 
-
+//    Optional<DoctorInfo> findByUserId(Long userId);
 
 
 }

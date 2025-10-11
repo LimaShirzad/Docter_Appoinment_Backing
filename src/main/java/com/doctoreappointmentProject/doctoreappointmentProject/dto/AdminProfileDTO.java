@@ -5,28 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
-public class DoctorInfoClientDTO {
-
+public class AdminProfileDTO {
 
     private int id;
-    private String firstName;
+    private  String firstName;
     private String lastName;
     private String email;
-    private String specialty;  // Specialty title
-    private String education;
-    private Integer experienceYear;
-    private String universityName;
-    private  String accepted;
-
-    private LocalDate graduationYear;
-    private String address;
+    private String password;
+    private String username;
     private Gender gender;
     private byte[] profilePicture;
+    private String role;
 
 
 
