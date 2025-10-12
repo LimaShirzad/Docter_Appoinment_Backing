@@ -1,6 +1,6 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 
-import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoSaveDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.mapper.DcotorInfoMapper;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
@@ -35,7 +35,7 @@ public class DoctorInfoService {
 
 
 
-    public List<DoctorInfoDTO> getAllDoctors() {
+    public List<DoctorInfoSaveDTO> getAllDoctors() {
 
         List<DoctorInfo> doctors = doctorInfoRepository.findAll();
         return doctorInfoMapper.toDtoList(doctors);
@@ -43,7 +43,7 @@ public class DoctorInfoService {
     }
 
     @Transactional
-    public  void saveDoctorInfo(DoctorInfoDTO doctorInfoSaveDTO) throws IOException {
+    public  void saveDoctorInfo(DoctorInfoSaveDTO doctorInfoSaveDTO) throws IOException {
 
 
         DoctorInfo doctorInfo=  doctorInfoMapper.toEntity(doctorInfoSaveDTO);

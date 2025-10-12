@@ -66,6 +66,7 @@ public class DashBoardService {
                 d.getGraduationYear(),
                 d.getAddress(),
                 d.getDoctor().getGender(),
+
                 d.getDoctor().getProfilePicture()
 
         )).collect(Collectors.toList());

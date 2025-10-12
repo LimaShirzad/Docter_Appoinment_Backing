@@ -1,8 +1,4 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.dto;
-import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,7 +14,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorInfoDTO {
+public class DoctorInfoSaveDTO {
 
     private int id;
 

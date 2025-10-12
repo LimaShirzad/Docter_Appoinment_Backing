@@ -37,13 +37,6 @@ public class DashBoardController {
     }
 
 
-//    @GetMapping("/profile")
-//    public ResponseEntity<?> getDoctorProfile(Authentication authentication) {
-//        String username = authentication.getName();
-//        DoctorProfileDTO profile = doctorInfoService.getDoctorProfile(username);
-//        return ResponseEntity.ok(profile);
-//    }
-
 
     @GetMapping("/adminprofile")
     public ResponseEntity<?> getAdminProfile(Authentication authentication){

@@ -111,7 +111,7 @@ public class PatientInfoControllerTest {
         // Mock profile DTO
         PatientInfoProfileDTO profileDTO = new PatientInfoProfileDTO();
         profileDTO.setId(1);
-        profileDTO.setFirstName("me sherzad");
+        profileDTO.setFirstName("me");
         profileDTO.setEmail("mesherzad@gamil.com");
 
         // Mock service
@@ -126,7 +126,7 @@ public class PatientInfoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.firstName").value("me sherzad"))
+                .andExpect(jsonPath("$.firstName").value("me"))
 //                .andExpect(jsonPath("$.la").value("John Doe"))
                 .andExpect(jsonPath("$.email").value("mesherzad@gamil.com"));
     }
