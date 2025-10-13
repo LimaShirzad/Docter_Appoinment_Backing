@@ -93,17 +93,6 @@ public class GlobalExceptionHandler {
 
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<?> handleRuntime(RuntimeException ex){
-//
-//        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error","somthing went wrong","details",ex.getMessage()));
-//
-//    }
-
-
-
-
-
 
 
 }

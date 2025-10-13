@@ -51,6 +51,13 @@ public class SpecialtyControllerTest {
         // Step 2: mock the service (void method)
         doNothing().when(specialtyService).saveSpecialty(specialty);
 
+ // mockMvc.perform(post("/api/patient/save")
+// contentType(MediaType.APPLICATION_JSON)
+//  .content("{\"id\":1,\"bloodGroup\":\"A\",\"userId\":1}"))
+// .andExpect(status().isOk())
+// .andExpect(jsonPath("$.success")
+// .value("Your Account Created Successfully"));
+
         // Step 3: perform POST request with JSON body
         mockMvc.perform(post("/api/specialty/save")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -144,40 +151,40 @@ public class SpecialtyControllerTest {
 //                .andExpect(jsonPath("$.content[1].title").value("Neurology"));
 //    }
 
+//    @Test
+//    void shouldReturnAllSpecialties() throws Exception {
+//        // Step 1: create some fake specialties
+//        Specialty s1 = new Specialty();
+//        s1.setId(1);
+//        s1.setTitle("Cardiology");
+//
+//        Specialty s2 = new Specialty();
+//        s2.setId(2);
+//        s2.setTitle("Neurology");
+//
+//        List<Specialty> specialties = List.of(s1, s2);
+//
+//        // Step 2: create a simple Page object
+//        Page<Specialty> page = new PageImpl<>(specialties);
+//
+//        // Step 3: mock the service
+//        when(specialtyService.getAllSpecialty(PageRequest.of(0,5))).thenReturn(page);
+//
+//        // Step 4: perform GET request
+//        mockMvc.perform(get("/api/specialty/all")
+//                        .param("page", "0")
+//                        .param("size", "5"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.content[0].id").value(1))
+//                .andExpect(jsonPath("$.content[0].title").value("Cardiology"))
+//                .andExpect(jsonPath("$.content[1].id").value(2))
+//                .andExpect(jsonPath("$.content[1].title").value("Neurology"));
+//    }
+
+
+
     @Test
     void shouldReturnAllSpecialties() throws Exception {
-        // Step 1: create some fake specialties
-        Specialty s1 = new Specialty();
-        s1.setId(1);
-        s1.setTitle("Cardiology");
-
-        Specialty s2 = new Specialty();
-        s2.setId(2);
-        s2.setTitle("Neurology");
-
-        List<Specialty> specialties = List.of(s1, s2);
-
-        // Step 2: create a simple Page object
-        Page<Specialty> page = new PageImpl<>(specialties);
-
-        // Step 3: mock the service
-        when(specialtyService.getAllSpecialty(PageRequest.of(0,5))).thenReturn(page);
-
-        // Step 4: perform GET request
-        mockMvc.perform(get("/api/specialty/all")
-                        .param("page", "0")
-                        .param("size", "5"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].id").value(1))
-                .andExpect(jsonPath("$.content[0].title").value("Cardiology"))
-                .andExpect(jsonPath("$.content[1].id").value(2))
-                .andExpect(jsonPath("$.content[1].title").value("Neurology"));
-    }
-
-
-
-    @Test
-    void shouldReturnAllSpecialtiess() throws Exception {
         // Step 1: create fake specialties
         Specialty s1 = new Specialty();
         s1.setId(1);
