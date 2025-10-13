@@ -49,8 +49,8 @@ public class TestUserService {
         role2.setId(2);
         role2.setRole("User");
 
-        User user1 = new User(1, "Ali", "Sherzad", "ali@gamil.com", "ali123","1234", "ali.pic".getBytes(), Gender.MALE, role1);
-        User user2 = new User(2, "Ahmad", "Ali", "ahmad@gamil.com", "ahmad123","345", "ahmad.pic".getBytes(), Gender.MALE, role2);
+        User user1 = new User(1, "Ali", "Sherzad", "ali@gamil.com", "ali123","1234","ali.jpg".getBytes(), Gender.MALE, role1);
+        User user2 = new User(2, "Ahmad", "Ali", "ahmad@gamil.com", "ahmad123","345", "ahmad.jpg".getBytes(), Gender.MALE, role2);
 
         List<User> users = List.of(user1, user2);
 
@@ -67,7 +67,7 @@ public class TestUserService {
         assertEquals("Sherzad",dto1.getLastName());
         assertEquals("ali@gamil.com",dto1.getEmail());
         assertEquals("ali123",dto1.getUserName());
-        assertEquals("ali.pic",dto1.getProfilePicture());
+        assertEquals("ali.jpg",dto1.getProfilePicture());
         assertEquals(Gender.MALE,dto1.getGender());
         assertEquals("Admin",dto1.getRole());
 
@@ -79,7 +79,7 @@ public class TestUserService {
         assertEquals("Ali",dto2.getLastName());
         assertEquals("ahmad@gamil.com",dto2.getEmail());
         assertEquals("ahmad123",dto2.getUserName());
-        assertEquals("ahmad.pic",dto2.getProfilePicture());
+        assertEquals("ahmad.jpg",dto2.getProfilePicture());
         assertEquals(Gender.MALE,dto2.getGender());
         assertEquals("User",dto2.getRole());
 
@@ -164,21 +164,6 @@ public class TestUserService {
         verify(userRepository, never()).deleteById(userId);
 
     }
-
-//    @Test
-//    @DisplayName("Test GetAllRolesExceptAdmin ")
-//    void shouldReturnListOfRole(){
-//
-//        Roles role1=new Roles(1,"Doctor");
-//        Roles role2=new Roles(2,"Patient");
-//
-//        List<Roles> roles=List.of(role1,role2);
-//
-//        when(userService.getAllRolesExceptAdmin()).thenReturn(roles);
-//
-//        verify(roleRepository).findAllExceptAdmin();
-//
-//    }
 
 
 }

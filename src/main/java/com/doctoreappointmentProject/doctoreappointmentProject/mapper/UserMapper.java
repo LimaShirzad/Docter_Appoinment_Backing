@@ -36,52 +36,6 @@ public class UserMapper {
 
     }
 
-//    public  UserSaveDTO toDto(User user){
-//
-//        UserSaveDTO userSaveDTO=new UserSaveDTO();
-//
-//        userSaveDTO.setFirstName(user.getFirstName());
-//        userSaveDTO.setLastName(user.getLastName());
-//        userSaveDTO.setEmail(user.getEmail());
-//        userSaveDTO.setUserName(user.getUserName());
-//        userSaveDTO.setPassword(user.getPassword());
-//        userSaveDTO.setGender(user.getGender());
-//        userSaveDTO.setProfilePictureUrl(user.getProfilePicture());
-//
-//        return  userSaveDTO;
-//
-//
-//    }
-
-//    public List<UserDTO> getAllUserMapper(){
-
-//        List<User> users=userRepository.findAll();
-//        return  users.stream()
-//                .map(user -> {
-//
-//
-//                    UserDTO dto=new UserDTO();
-//                    dto.setId(user.getId());
-//                    dto.setFirstName(user.getFirstName());
-//                    dto.setLastName(user.getLastName());
-//                    dto.setEmail(user.getEmail());
-//                    dto.setUserName(user.getUserName());
-////                    dto.setProfilePicture(user.getProfilePicture());
-//                    dto.setGender(user.getGender());
-//
-////        =================form role entity===============
-//                    if(user.getRole() !=null){
-//
-//                        dto.setRole(user.getRole().getRole());
-//                        dto.setRoleID(user.getId());
-//
-//                    }
-//                    return  dto;
-//
-//
-//                }).collect(Collectors.toList());
-
-//    }
 
     public UserDTO getUserById(User user){
 
@@ -108,8 +62,29 @@ public class UserMapper {
 
     }
 
+    public UserDTO toDTO(User user) {
+        UserDTO dto = new UserDTO();
 
+        dto.setId(user.getId());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setUserName(user.getUserName());
+        dto.setGender(user.getGender());
 
+        // عکس (byte[] → String)
+        if (user.getProfilePicture() != null) {
+            dto.setProfilePicture(new String(user.getProfilePicture()));
+        }
+
+        // رول
+        if (user.getRole() != null) {
+            dto.setRole(user.getRole().getRole());
+            dto.setRoleID(user.getRole().getId());
+        }
+
+        return dto;
+    }
 
 
 
