@@ -2,6 +2,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject.service;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.UserDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
+import com.doctoreappointmentProject.doctoreappointmentProject.mapper.UserMapper;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.Roles;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.RoleRepository;
@@ -28,6 +29,10 @@ public class TestUserService {
 
     @Mock
     RoleRepository roleRepository;
+
+
+    @Mock
+    private UserMapper userMapper;
 
 
     @InjectMocks

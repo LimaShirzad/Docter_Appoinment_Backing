@@ -10,6 +10,7 @@ import com.doctoreappointmentProject.doctoreappointmentProject.exception.UserExc
 import jakarta.transaction.Transactional;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,16 @@ import java.util.stream.Collectors;
 public class UserService {
 
 
+    @Autowired
    private final UserRepository userRepository;
 
+    @Autowired
    private final RoleRepository roleRepository;
 
+    @Autowired
     private final UserMapper userMapper;
 
+    @Autowired
     private final UserException userException;
 
     private  final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
