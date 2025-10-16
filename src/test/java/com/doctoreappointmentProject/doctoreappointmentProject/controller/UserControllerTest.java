@@ -89,7 +89,7 @@ public class UserControllerTest {
         userDTO.setLastName("Doe");
         userDTO.setEmail("john@example.com");
         userDTO.setUserName("johndoe");
-        userDTO.setProfilePicture("profile.jpg");
+        userDTO.setProfilePicture("profile.jpg".getBytes());
         userDTO.setGender(Gender.MALE);
         userDTO.setRole("Admin");
 

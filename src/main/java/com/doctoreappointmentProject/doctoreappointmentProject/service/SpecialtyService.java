@@ -28,7 +28,6 @@ public class SpecialtyService {
 
         SpecialtyUtil.isOnlyLetters(specialty.getTitle());
 
-//        SpecialtyException.checkIfSpecialtyIsAlreadyExist(specialty.getTitle());
 
 
         if(specialtyRepository.existsByTitle(specialty.getTitle())){

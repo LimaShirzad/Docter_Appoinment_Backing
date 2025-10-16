@@ -16,7 +16,7 @@ public class UserDTO {
     private String lastName;
     private String email;
     private  String userName;
-    private  String profilePicture;
+    private  byte[] profilePicture;
     private Gender gender;
 
 //    ==============get data from role=========

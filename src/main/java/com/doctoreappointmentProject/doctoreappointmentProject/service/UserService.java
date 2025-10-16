@@ -71,7 +71,7 @@ public class UserService {
                     dto.setLastName(user.getLastName());
                     dto.setEmail(user.getEmail());
                     dto.setUserName(user.getUserName());
-//                    dto.setProfilePicture(user.getProfilePicture());
+                    dto.setProfilePicture(user.getProfilePicture());
                     dto.setGender(user.getGender());
 
 //        =================form role entity===============
@@ -93,6 +93,13 @@ public class UserService {
 
     }
 
+//    public UserDTO getUserById(int id) {
+//        User user = userRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+//
+//        return userMapper.getUserById(user); // 🟢 دا mapper ته user ورلېږي
+//    }
+//}
 
     public UserDTO getUserById(Long id) {
 
