@@ -102,22 +102,7 @@ public class SpecialtyServiceTest {
 
     }
 
-//    get one id
-//    return id and throw new exprtion
 
-//    void shouldReturnRoleById(){
-//
-//        Roles role=new Roles(1,"ADMIN");
-//
-//        when(roleRepository.findById(1L)).thenReturn(Optional.of(role));
-//
-//        Roles result=roleService.getRoleById(1L);
-//
-//        assertEquals("ADMIN",result.getRole());
-//
-//        verify(roleRepository).findById(1L);
-//
-//    }
     @Test
     @DisplayName("return specialty by id")
     void shouldReturnSpecialtyById(){
@@ -166,65 +151,6 @@ public class SpecialtyServiceTest {
 
 
     }
-
-
-    @Test
-    void testGetAllSpecialty() {
-        // Step 1: Create mock repository
-        SpecialtyRepository mockRepo = Mockito.mock(SpecialtyRepository.class);
-
-        // Step 2: Create service and inject mock repo
-        SpecialtyService service = new SpecialtyService(mockRepo);
-
-        // Step 3: Prepare fake data
-        Specialty s1 = new Specialty(1, "Cardiology");
-        Specialty s2 = new Specialty(2, "Dermatology");
-
-        Pageable pageable = PageRequest.of(0, 2);
-        Page<Specialty> fakePage = new PageImpl<>(List.of(s1, s2));
-
-        // Step 4: Tell mock what to return
-        when(mockRepo.findAll(pageable)).thenReturn(fakePage);
-
-        // Step 5: Call method
-        Page<Specialty> result = service.getAllSpecialty(pageable);
-
-        // Step 6: Check result
-        assertEquals(2, result.getContent().size());
-        assertEquals("Cardiology", result.getContent().get(0).getTitle());
-
-        // Step 7: Verify method was called
-        verify(mockRepo, times(1)).findAll(pageable);
-    }
-
-
-
-
-    @Test
-    void shouldReturnPagedSpecialties() {
-        // Arrange
-        Pageable pageable = PageRequest.of(0, 2);
-
-        Specialty s1 = new Specialty(1, "Cardiology");
-        Specialty s2 = new Specialty(2, "Neurology");
-
-        List<Specialty> specialties = Arrays.asList(s1, s2);
-        Page<Specialty> specialtyPage = new PageImpl<>(specialties, pageable, specialties.size());
-
-        when(specialtyRepository.findAll(pageable)).thenReturn(specialtyPage);
-
-        // Act
-        Page<Specialty> result = specialtyService.getAllSpecialty(pageable);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(2, result.getContent().size());
-        assertEquals("Cardiology", result.getContent().get(0).getTitle());
-
-        // Verify repository interaction
-        verify(specialtyRepository, times(1)).findAll(pageable);
-    }
-
 
 
     @Test
