@@ -9,6 +9,9 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.time.LocalDate;
 
 
@@ -84,14 +87,19 @@ public class DoctorInfo {
     @Column(name="accepted",length = 50)
     private  String accepted="PENDING";
 
-
+//
     @OneToOne
     @JoinColumn(name="user_id" ,referencedColumnName = "id",nullable = false)
+//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name="user_id", referencedColumnName = "id", nullable = false)
     private  User doctor;
 
 
     @ManyToOne
     @JoinColumn(name="specialty_id",referencedColumnName = "id",nullable = false)
+//    @ManyToOne
+//    @JoinColumn(name="specialty_id", referencedColumnName="id", nullable=false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private  Specialty specialty;
 
 

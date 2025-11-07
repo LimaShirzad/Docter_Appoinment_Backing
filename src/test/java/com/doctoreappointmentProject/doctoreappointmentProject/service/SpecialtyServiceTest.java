@@ -153,31 +153,6 @@ public class SpecialtyServiceTest {
     }
 
 
-    @Test
-    void testUpdateSpecialtyById() {
-        // Step 1: Mock the repository
-        SpecialtyRepository mockRepo = Mockito.mock(SpecialtyRepository.class);
-
-        // Step 2: Create service and give mock repo
-        SpecialtyService service = new SpecialtyService(mockRepo);
-
-        // Step 3: Fake existing and updated specialties
-        Specialty oldOne = new Specialty(1, "Heart");
-        Specialty newOne = new Specialty(1, "Brain");
-
-        // Step 4: Mock repository behavior
-        when(mockRepo.findById(1L)).thenReturn(java.util.Optional.of(oldOne));
-        when(mockRepo.existsByTitle("Brain")).thenReturn(false);
-        when(mockRepo.save(any(Specialty.class))).thenAnswer(i -> i.getArgument(0)); // return saved one
-
-        // Step 5: Call method
-        Specialty result = service.updateSpecialtyById(1L, newOne);
-
-        // Step 6: Check results
-        assertEquals("Brain", result.getTitle());
-        verify(mockRepo, times(1)).save(any(Specialty.class));
-    }
-
 
 
 

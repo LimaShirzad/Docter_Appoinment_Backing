@@ -21,6 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
 
+//    this method will be call Automatically when a user Login
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -28,8 +29,10 @@ public class MyUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
 
 
-        String role = user.getRole().getRole().toUpperCase(); // "DOCTOR" or "ADMIN"
+        String role = user.getRole().getRole().toUpperCase();
 
+
+//        making user details obejct that say its my username password and role
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUserName())
                 .password(user.getPassword())

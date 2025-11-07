@@ -16,13 +16,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
-@Component
+@Component                              // i am one filter that perform once for every request means will perform before every API
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private  final MyUserDetailsService userDetailsService;
+    private  final MyUserDetailsService myUserDetailsService;
 
     public JwtAuthFilter(MyUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+        this.myUserDetailsService = userDetailsService;
     }
 
 
@@ -39,18 +39,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+//                take information from database (by username ) this information include id,username,password and role
+                UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
 
                 String role = JwtUtil.getRoleFromToken(token);
                 List<SimpleGrantedAuthority> authorities = List.of(
                         new SimpleGrantedAuthority("ROLE_" + role.toUpperCase())
                 );
 
+
+// htis user is login this is her/his information and show the user permission and authorities
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+//its like a box the spring security hold the current user login information
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }

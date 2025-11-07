@@ -68,14 +68,24 @@ public class SpecialtyController {
         return specialtyService.updateSpecialtyById(id, specialty);
     }
 
+//
+//    @GetMapping("/all")
+//    public Page<Specialty> getAllSpecialty(@RequestParam(defaultValue = "0") int page,
+//                                           @RequestParam(defaultValue = "5") int size){
+//
+//        return specialtyService.getAllSpecialty(PageRequest.of(page,size));
+//
+//    }
 
     @GetMapping("/all")
-    public Page<Specialty> getAllSpecialty(@RequestParam(defaultValue = "0") int page,
-                                           @RequestParam(defaultValue = "5") int size){
+    public Page<Specialty> getAllSpecialty(
+            @RequestParam(defaultValue = "") String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
 
-        return specialtyService.getAllSpecialty(PageRequest.of(page,size));
-
+        return specialtyService.getAllSpecialty(keyword, PageRequest.of(page, size));
     }
+
 
     @GetMapping("/all_Specialty")
     public List<Specialty> getAllSpecialty(){

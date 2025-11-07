@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Integer> {
+public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Long> {
 
 
     Optional<DoctorInfo> findByDoctor(User username);
@@ -67,5 +67,8 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Integer> 
 
 
         Optional<DoctorInfo> findByDoctorId(Long userId);
+
+//    Optional<DoctorInfo> findByDoctorId(Long userId);
+
 
 }

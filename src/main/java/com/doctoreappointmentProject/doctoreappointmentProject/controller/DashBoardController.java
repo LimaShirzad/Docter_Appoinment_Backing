@@ -80,15 +80,17 @@ public class DashBoardController {
     }
 
     @DeleteMapping("/deleteDoctor/{id}")
-    public ResponseEntity<Map<String,String>> deleteDoctorById(@PathVariable Long id){
+    public ResponseEntity<Map<String,String>> deleteDoctorById(@PathVariable Long id) {
 
         dashBoardService.deleteDocotorById(id);
 
-        dashboardResponse.put("deleteMessage","Doctor Remove Successfully");
+        Map<String, String> dashboardResponse = new HashMap<>();
+
+        dashboardResponse.put("deleteMessage", "Doctor Remove Successfully");
 
         return new ResponseEntity<>(dashboardResponse, HttpStatus.OK);
-
     }
+
 
     @GetMapping("/getDocotor/{id}")
     public DoctorInfoClientDTO getDoctorById(@PathVariable Long id){

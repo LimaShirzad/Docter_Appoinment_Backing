@@ -1,6 +1,8 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.service;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.LoginRequest;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.LoginResponse;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.util.JwtUtil;
@@ -26,9 +28,9 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public Map<String, Object> login(String username, String password) {
+    public LoginResponse login(String username, String password) {
 
-//        try{
+
 
             Authentication authentication=authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username,password)
@@ -43,12 +45,21 @@ public class AuthService {
 
             String token=JwtUtil.generateToken(user.getUserName(), (long) user.getId(),user.getRole().getRole());
 
+           LoginResponse loginResponse = new LoginResponse();
 
-            return Map.of("token",token,
-                    "id",user.getId(),
-                    "username",user.getUserName(),
-                    "role",user.getRole().getId(),
-                    "roleName",user.getRole());
+           loginResponse.setId(user.getId());
+           loginResponse.setUserName(user.getUserName());
+           loginResponse.setRole(user.getRole().getRole());
+           loginResponse.setRoleId(user.getRole().getId());
+           loginResponse.setToken(token);
+
+           return  loginResponse;
+
+//            return Map.of("token",token,
+//                    "id",user.getId(),
+//                    "username",user.getUserName(),
+//                    "role",user.getRole().getId(),
+//                    "roleName",user.getRole());
 
 
 

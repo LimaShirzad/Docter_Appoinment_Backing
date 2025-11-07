@@ -57,11 +57,19 @@ public class SpecialtyService {
 
     }
 
-    public Page<Specialty> getAllSpecialty(Pageable pageable){
+//    public Page<Specialty> getAllSpecialty(Pageable pageable){
+//
+//          return specialtyRepository.findAll(pageable);
+//
+//    }
 
-          return specialtyRepository.findAll(pageable);
-
+    public Page<Specialty> getAllSpecialty(String keyword, Pageable pageable) {
+        if (keyword == null || keyword.isEmpty()) {
+            return specialtyRepository.findAll(pageable);
+        }
+        return specialtyRepository.searchAllFields(keyword, pageable);
     }
+
 
     @Transactional
 //    @CachePut(value = "specialties", key = "#id")

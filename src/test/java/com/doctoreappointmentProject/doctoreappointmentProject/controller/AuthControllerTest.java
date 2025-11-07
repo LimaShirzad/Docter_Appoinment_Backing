@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.LoginResponse;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.AuthService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,8 +36,10 @@ public class AuthControllerTest {
     @Test
     void loginShouldReturn200WhenCredentialsAreValid() throws Exception{
 
-        Map<String,Object>  result=new HashMap<>();
-        result.put("token","dummy-jwt-token");
+       LoginResponse  result=new LoginResponse();
+//        result.put("token","dummy-jwt-token");
+
+        result.setToken("dummy-jwt-token");
 
         Mockito.when(authService.login("testuser","password123")).thenReturn(result);
 

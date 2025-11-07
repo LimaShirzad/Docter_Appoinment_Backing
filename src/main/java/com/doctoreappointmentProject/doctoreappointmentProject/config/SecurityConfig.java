@@ -26,6 +26,7 @@ public class SecurityConfig {
         this.jwtAuthFilter = jwtAuthFilter;
     }
 
+//    verify the username and password during login
     @Bean
     public  AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder encoder, UserDetailsService uds) throws  Exception{
 
@@ -45,7 +46,7 @@ public class SecurityConfig {
 //        /api/client
         http
                 .csrf().disable()
-                .cors().and()
+                .cors().and() // allow request from diffrent origin
                 .authorizeHttpRequests(auth->
                         auth.requestMatchers("/api/user/save").permitAll()
                                 .requestMatchers("/auth/**").permitAll()

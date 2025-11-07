@@ -74,12 +74,29 @@ public class DashBoardService {
 
     }
 
-    public void deleteDocotorById(Long id) {
+//    public void deleteDocotorById(Long id) {
+//
+//        userRepository.deleteById(id);
+//
+//    }
 
-        userRepository.deleteById(id);
+    public void deleteDocotorById(Long userId) {
 
+        // find doctorInfo by user_id instead of doctorInfo.id
+        DoctorInfo doctorInfo = doctorInfoRepository.findByDoctorId(userId)
+                .orElseThrow(() -> new RuntimeException("Doctor not found with user id: " + userId));
+
+        User user = doctorInfo.getDoctor();
+
+//        // Break relationship first
+//        doctorInfo.setDoctor(null);
+        doctorInfoRepository.delete(doctorInfo);
+
+        // Delete user record
+//        if (user != null) {
+            userRepository.delete(user);
+//        }
     }
-
 
     public DoctorInfoClientDTO getDoctoById(Long id) {
 

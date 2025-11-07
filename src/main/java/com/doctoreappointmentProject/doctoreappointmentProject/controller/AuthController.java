@@ -1,6 +1,7 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.LoginRequest;
+import com.doctoreappointmentProject.doctoreappointmentProject.dto.LoginResponse;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.AuthService;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.MyUserDetailsService;
@@ -35,7 +36,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
 
 
-            Map<String, Object> result=authService.login(loginRequest.getUsername(),loginRequest.getPassword());
+            LoginResponse result=authService.login(loginRequest.getUsername(),loginRequest.getPassword());
 
             return  ResponseEntity.ok(result);
 
