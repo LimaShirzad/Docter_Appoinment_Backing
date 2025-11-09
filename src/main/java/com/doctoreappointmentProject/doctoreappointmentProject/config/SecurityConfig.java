@@ -58,6 +58,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/doctors/save").permitAll()
                                 .requestMatchers("/api/doctors/**").permitAll()
                                 .requestMatchers("/api/diseases/all").hasRole("PATIENTS")
+                                .requestMatchers("/api/appointments/save").hasRole("PATIENTS")
                                 .requestMatchers("/api/diseases/save").hasRole("ADMIN")
 
                                 .requestMatchers("/api/doctors/profile").hasRole("DOCTOR")
