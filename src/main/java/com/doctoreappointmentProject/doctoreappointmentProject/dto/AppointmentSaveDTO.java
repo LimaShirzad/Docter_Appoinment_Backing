@@ -1,5 +1,6 @@
 package com.doctoreappointmentProject.doctoreappointmentProject.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -20,6 +21,7 @@ public class AppointmentSaveDTO {
     @NotNull(message = "Date Must Not Be empty")
     private LocalDate date;
     @NotNull(message = "time Must Not Be empty")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
 
 }

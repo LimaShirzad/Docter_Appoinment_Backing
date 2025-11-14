@@ -147,7 +147,7 @@ public class UserService {
         User savedUser=userRepository.save(user);
 
 //        =====================return user id and role id for login form===========
-        return new UserSaveDTO(user.getId(),savedUser.getRole().getId());
+        return new UserSaveDTO(user.getId(),savedUser.getRole().getId(), user.getUserName(), user.getPassword());
 
     }
 

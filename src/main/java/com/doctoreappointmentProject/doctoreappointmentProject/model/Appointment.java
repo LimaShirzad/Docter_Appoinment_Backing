@@ -67,7 +67,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name="disease_id",referencedColumnName ="id")
-    @Positive(message = "Please Select Disease")
+//    @Positive(message = "Please Select Disease")
     @NotNull(message = "Please Select Disease")
     private Diseases disease;
 

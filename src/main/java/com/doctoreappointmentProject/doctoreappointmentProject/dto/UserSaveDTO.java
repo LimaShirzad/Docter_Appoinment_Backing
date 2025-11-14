@@ -45,9 +45,13 @@ public class UserSaveDTO {
     private byte[] profilePictureUrl;
 
 
-    public UserSaveDTO(int id, int roleId) {
+
+
+    public UserSaveDTO(int id, int roleId,String userName,String password) {
         this.id = id;
         this.roleId = roleId;
+        this.userName=userName;
+        this.password=password;
     }
 
 

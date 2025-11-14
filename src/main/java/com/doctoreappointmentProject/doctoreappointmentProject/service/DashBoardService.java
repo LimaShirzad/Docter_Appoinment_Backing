@@ -4,8 +4,10 @@ package com.doctoreappointmentProject.doctoreappointmentProject.service;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.AdminProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.mapper.UserMapper;
+import com.doctoreappointmentProject.doctoreappointmentProject.model.Appointment;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.DoctorInfo;
 import com.doctoreappointmentProject.doctoreappointmentProject.model.User;
+import com.doctoreappointmentProject.doctoreappointmentProject.repository.AppointmentRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.DoctorInfoRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.PatientInfoRepository;
 import com.doctoreappointmentProject.doctoreappointmentProject.repository.UserRepository;
@@ -25,13 +27,15 @@ public class DashBoardService {
     private final   DoctorInfoRepository doctorInfoRepository;
     private final   PatientInfoRepository patientInfoRepository;
     private final    UserRepository userRepository;
+    private final AppointmentRepository appointmentRepository;
     private final UserMapper userMapper;
 
-    public DashBoardService(DoctorInfoRepository doctorInfoRepository, PatientInfoRepository patientInfoRepository, UserRepository userRepository, UserMapper userMapper) {
+    public DashBoardService(DoctorInfoRepository doctorInfoRepository, PatientInfoRepository patientInfoRepository, UserRepository userRepository, AppointmentRepository appointmentRepository, UserMapper userMapper) {
 
         this.doctorInfoRepository = doctorInfoRepository;
         this.patientInfoRepository = patientInfoRepository;
         this.userRepository = userRepository;
+        this.appointmentRepository = appointmentRepository;
         this.userMapper = userMapper;
     }
 
@@ -88,13 +92,22 @@ public class DashBoardService {
 
         User user = doctorInfo.getDoctor();
 
+
+
+
 //        // Break relationship first
-//        doctorInfo.setDoctor(null);
+        doctorInfo.setDoctor(null);
         doctorInfoRepository.delete(doctorInfo);
+
+//        Appointment appointment=appointmentRepository.findByDoctorId(userId)
+//                .orElseThrow(()-> new RuntimeException("Doctor Not Found"));
+//        appointmentRepository.deleteById(user.getId());
+
 
         // Delete user record
 //        if (user != null) {
             userRepository.delete(user);
+
 //        }
     }
 
