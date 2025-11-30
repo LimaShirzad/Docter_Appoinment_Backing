@@ -4,6 +4,7 @@ package com.doctoreappointmentProject.doctoreappointmentProject.controller;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.AdminProfileDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO;
 import com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorProfileDTO;
+import com.doctoreappointmentProject.doctoreappointmentProject.enums.Status;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.ClientService;
 import com.doctoreappointmentProject.doctoreappointmentProject.service.DashBoardService;
 //import org.springframework.security.core.Authentication;
@@ -76,6 +77,7 @@ public class DashBoardController {
         response.put("doctors", doctors);
         response.put("currentPage", page);
         response.put("totalPages", totalPages);
+//        response.put("status", Status.values());
         return response;
     }
 
@@ -93,11 +95,30 @@ public class DashBoardController {
 
 
     @GetMapping("/getDocotor/{id}")
-    public DoctorInfoClientDTO getDoctorById(@PathVariable Long id){
+    public ResponseEntity<Map<String,Object>> getDoctorById(@PathVariable Long id){
 
-        return  dashBoardService.getDoctoById(id);
+
+        DoctorInfoClientDTO doctor=dashBoardService.getDoctoById(id);
+
+        Map<String,Object> response = new HashMap<>();
+        response.put("doctor", doctor);
+        response.put("status", Status.values());
+//        return  dashBoardService.getDoctoById(id);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
 
     }
+
+    @PutMapping("/update-status/{id}")
+    public ResponseEntity<?> updateStatus(
+            @PathVariable Long id,
+            @RequestBody String status
+    ) {
+        dashBoardService.updateDoctorStatus(id, status.replace("\"", ""));
+        return ResponseEntity.ok("Status Updated!");
+    }
+
+
 
 
 

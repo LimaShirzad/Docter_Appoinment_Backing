@@ -85,6 +85,12 @@ public class GlobalExceptionHandler {
 
     }
 
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<?> handleRuntime(RuntimeException ex) {
+//        HashMap<String, Object> error = new HashMap<>();
+//        error.put("message", ex.getMessage());
+//        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+//    }
     @ExceptionHandler(BadCredentialsException.class)
     public  ResponseEntity<?> handleBadCredentials(BadCredentialsException ex){
 

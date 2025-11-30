@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -26,7 +27,7 @@ public class AuthController {
 
 
     private  final AuthService authService;
-
+    private final Map<String,String> authResponse=new HashMap<>();
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -36,7 +37,10 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
 
 
+
             LoginResponse result=authService.login(loginRequest.getUsername(),loginRequest.getPassword());
+
+
 
             return  ResponseEntity.ok(result);
 

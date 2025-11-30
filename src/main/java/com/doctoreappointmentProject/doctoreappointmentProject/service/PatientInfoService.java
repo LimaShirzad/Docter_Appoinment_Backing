@@ -55,8 +55,8 @@ public class PatientInfoService {
     }
 
     public PatientInfoProfileDTO getPatientProfile(String username) {
-        User user = userRepository.findByUserName(username)
-                .orElseThrow(() -> new RuntimeException("Patient not found"));
+        User user = userRepository.findByUserName(username);
+//                .orElseThrow(() -> new RuntimeException("Patient not found"));
 
         PatientInfo patientInfo = patientInfoRepository.findByPatient(user)
                 .orElseThrow(() -> new RuntimeException("patient profile not found"));

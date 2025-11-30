@@ -19,12 +19,13 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Long> {
 
     Optional<DoctorInfo> findByDoctor(User username);
 
+
     @Query("SELECT new com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO(" +
             "u.id, " +
             "u.firstName, " +
             "u.lastName, " +
             "u.email, " +
-            "s.title, " +            // Specialty title
+            "s.title, " +
             "d.education, " +
             "d.experienceYear, " +
             "d.universityName, " +
@@ -36,8 +37,10 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Long> {
             ") " +
             "FROM DoctorInfo d " +
             "JOIN d.doctor u " +
-            "JOIN d.specialty s")
+            "JOIN d.specialty s " +
+            "WHERE d.accepted = 'ACCEPT'")
     List<DoctorInfoClientDTO> findAllDoctor();
+
 
 
     @Query("SELECT new com.doctoreappointmentProject.doctoreappointmentProject.dto.DoctorInfoClientDTO(" +

@@ -125,8 +125,8 @@ public class DashBoardService {
 
     public AdminProfileDTO getAdminProfile(String username) {
 
-        User user = userRepository.findByUserName(username)
-                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+        User user = userRepository.findByUserName(username);
+//                .orElseThrow(() -> new RuntimeException("Doctor not found"));
 
         AdminProfileDTO dto=new AdminProfileDTO();
 
@@ -134,4 +134,19 @@ public class DashBoardService {
 
 
     }
+
+
+    public void updateDoctorStatus(Long userId, String status) {
+
+        DoctorInfo doctorInfo = doctorInfoRepository.findByDoctorId(userId)
+                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+
+        doctorInfo.setAccepted(status);
+
+        doctorInfoRepository.save(doctorInfo);
+    }
+
+
+
+
 }
