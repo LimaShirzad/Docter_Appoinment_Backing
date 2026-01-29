@@ -2,6 +2,9 @@ package com.doctoreappointmentProject.doctoreappointmentProject.dto;
 
 import com.doctoreappointmentProject.doctoreappointmentProject.enums.Gender;
 import com.doctoreappointmentProject.doctoreappointmentProject.enums.Status;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +32,7 @@ public class DoctorInfoClientDTO {
     private String address;
     private Gender gender;
 //    private Status status;
+    private  byte[] cv;
 
     private byte[] profilePicture;
 

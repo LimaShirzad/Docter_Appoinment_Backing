@@ -23,11 +23,11 @@ public class RoleController {
 //        this.rolesUtil = rolesUtil;
     }
 
-    @GetMapping("/hi")
-    public  String show()
-    {
-          return "Hello";
-    }
+//    @GetMapping("/hi")
+//    public  String show()
+//    {
+//          return "Hello";
+//    }
 
 
     @PostMapping("/save")

@@ -33,6 +33,7 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Long> {
             "d.graduationYear, " +
             "d.address, " +
             "u.gender, " +
+            "d.cv, " +
             "u.profilePicture" +
             ") " +
             "FROM DoctorInfo d " +
@@ -56,6 +57,7 @@ public interface DoctorInfoRepository extends JpaRepository<DoctorInfo,Long> {
             "d.graduationYear, " +
             "d.address, " +
             "u.gender, " +
+            "d.cv, " +
             "u.profilePicture" +
             ") " +
             "FROM DoctorInfo d " +

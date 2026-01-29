@@ -70,6 +70,7 @@ public class DashBoardService {
                 d.getGraduationYear(),
                 d.getAddress(),
                 d.getDoctor().getGender(),
+                d.getCv(),
 
                 d.getDoctor().getProfilePicture()
 
@@ -105,10 +106,10 @@ public class DashBoardService {
 
 
         // Delete user record
-//        if (user != null) {
+        if (user != null) {
             userRepository.delete(user);
 
-//        }
+        }
     }
 
     public DoctorInfoClientDTO getDoctoById(Long id) {

@@ -94,6 +94,7 @@ public class UserMapper {
         dto.setUniversityName(doctorInfo.getUniversityName());
         dto.setAccepted(doctorInfo.getAccepted());
         dto.setProfilePicture(user.getProfilePicture());
+        dto.setCv(doctorInfo.getCv());
         dto.setGender(user.getGender());
 
 

@@ -16,19 +16,18 @@ public class RoleService {
 
 
 
-
     public Roles saveRole(Roles role)
     {
-        if(!ValidationUtil.isOnlyLetters(role.getRole())){
-
-            throw new
-                    IllegalArgumentException("Role name should contain only letters");
-
-        }
-
-        if (roleRepository.existsByRole(role.getRole())) {
-            throw new IllegalArgumentException("Role already exists");
-        }
+//        if(!ValidationUtil.isOnlyLetters(role.getRole())){
+//
+//            throw new
+//                    IllegalArgumentException("Role name should contain only letters");
+//
+//        }
+//
+//        if (roleRepository.existsByRole(role.getRole())) {
+//            throw new IllegalArgumentException("Role already exists");
+//        }
 
         return  roleRepository.save(role);
 

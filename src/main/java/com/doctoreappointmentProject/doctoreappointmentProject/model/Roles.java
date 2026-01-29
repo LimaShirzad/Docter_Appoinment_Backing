@@ -32,25 +32,25 @@ public class Roles {
     private  Integer id;
 
 
-    @NotBlank(message = "the role should not be blank")
+//    @NotBlank(message = "the role should/ not be blank")
     @Size(max=50,message = "The role Name should not be greater than 50")
     @Column(name="role" ,nullable = false,unique = true,length = 50)
 //    @JsonProperty("role")
     private  String role;
 
-//    @PrePersist
-//    @PreUpdate
-//
-//    public  void preSave(){
-//        this.role= ValidationUtil.cleanString(this.role);
-//        this.role=ValidationUtil.capitalizeFirstLetter(this.role);
-//
-//        if (!ValidationUtil.isOnlyLetters(this.role)) {
-//            throw new IllegalArgumentException("Role name should contain only letters");
-//        }
-//
-//
-//    }
+    @PrePersist
+    @PreUpdate
+
+    public  void preSave(){
+        this.role= ValidationUtil.cleanString(this.role);
+        this.role=ValidationUtil.capitalizeFirstLetter(this.role);
+
+        if (!ValidationUtil.isOnlyLetters(this.role)) {
+            throw new IllegalArgumentException("Role name should contain only letters");
+        }
+
+
+    }
 
 
 
