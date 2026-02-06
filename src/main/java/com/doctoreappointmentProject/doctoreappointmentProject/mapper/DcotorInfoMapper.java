@@ -72,6 +72,7 @@ public class DcotorInfoMapper {
         if (user == null || doctorInfo == null) return null;
 
         DoctorProfileDTO dto = new DoctorProfileDTO();
+        dto.setId(doctorInfo.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());

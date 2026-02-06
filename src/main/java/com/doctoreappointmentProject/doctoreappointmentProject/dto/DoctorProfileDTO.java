@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class DoctorProfileDTO {
 
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
